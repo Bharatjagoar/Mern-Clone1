@@ -37,7 +37,7 @@ function FeedsNavBar(){
                 break
             default:
                 break;
-        }    
+        }
         
     }
         let stylethis= {

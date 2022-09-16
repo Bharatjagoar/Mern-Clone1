@@ -21,6 +21,7 @@
     font-size: 20px;
 }
 .ProfileBtn{
+    background-color: #F0F2F5;
     border: none;
     transition: all 1s ;
 }

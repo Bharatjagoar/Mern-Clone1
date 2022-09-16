@@ -1,12 +1,10 @@
 import React from "react";
-import NameUpdate from "./updation forms/nameupdation";
-import DevicesNames from "./security and login/devicelist";
-
+import CropperReact from "./security and login/updateProfilePic";
 
 function Blocking(){
 
     return <div>
-        <DevicesNames/>
+        <CropperReact/>
     </div> 
 }
 

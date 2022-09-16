@@ -32,10 +32,12 @@ function MajorInput(props){
         setcaption(e.target.value)
     }
     function FilesInput(file){
+        console.log(file,"this is thee file")
         setuploadPicture(file)
         setpreviewdisplay(true)
         setimagetag(true)
         let src = URL.createObjectURL(file[0])
+        console.log(src,"this is from postbtn")
         setpreviewImage(src)
     }
     function cancellingImage(){

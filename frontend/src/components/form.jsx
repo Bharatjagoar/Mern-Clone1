@@ -28,7 +28,6 @@ function Form() {
         password: password,
       })
       .then((result) => {
-        console.log("helo worodajbkaf a")
         if (result.data.message) {
           console.log(result.data.message, "messa");
             const SesResponse = axios.get("http://localhost:5000/User/loginSesion",{Credential:true});

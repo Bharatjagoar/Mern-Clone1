@@ -1,0 +1,12 @@
+.containerCropper{
+    width: 90%;
+    height: 400px;
+    position: relative;
+    margin: 0px auto;
+}
+.cropper{
+    width: 90%;
+    height: 20%;
+    position: relative;
+    background-color: aliceblue;
+}

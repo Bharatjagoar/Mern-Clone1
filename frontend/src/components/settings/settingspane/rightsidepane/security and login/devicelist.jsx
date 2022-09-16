@@ -41,20 +41,24 @@ function DevicesNames(){
 
 
     return <div className={DevicesCss.outerMostcontainer}>
-        <h4 className={DevicesCss.heading}>Logged in with these devices  </h4>
+        <div className={DevicesCss.HeadingContainer}>
+            <h4 className={DevicesCss.heading}>Logged in with these devices  </h4>
+        </div>
+        <div className={DevicesCss.parentMaincontainer}>
         <div className={DevicesCss.maincontainer}>
-            <div className={DevicesCss.MappingContainer}> 
-                {
-                    Devices?.map((item,pos)=>{
-                        return (<div key={pos} className={DevicesCss.MapperDiv}>
-                            <div className={DevicesCss.logoDiv}>
-                                <img src={src(item)} alt=""  className={DevicesCss.logos}/>
-                            </div>
-                            <div className={DevicesCss.Devicedetails}>{item.description}</div>
-                        </div>)
-                    })
-                }        
-            </div>
+                <div className={DevicesCss.MappingContainer}> 
+                    {
+                        Devices?.map((item,pos)=>{
+                            return (<div key={pos} className={DevicesCss.MapperDiv}>
+                                <div className={DevicesCss.logoDiv}>
+                                    <img src={src(item)} alt=""  className={DevicesCss.logos}/>
+                                </div>
+                                <div className={DevicesCss.Devicedetails}>{item.description}</div>
+                            </div>)
+                        })
+                    }        
+                </div>            
+        </div>
         </div>
     </div>
 }
