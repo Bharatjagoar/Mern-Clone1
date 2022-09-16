@@ -1,0 +1,13 @@
+.OuterMost{
+    display: flex;
+    height: 100%;
+}
+.rightSide{
+    display: inline-block;
+    width: 80%;
+}
+.leftside{
+    width: 30%;
+    display: inline-block;
+    overflow: hidden;
+}

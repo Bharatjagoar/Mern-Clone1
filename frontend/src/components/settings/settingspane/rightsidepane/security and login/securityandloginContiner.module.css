@@ -1,0 +1,47 @@
+.outermostDiv{
+    width: 100%;
+    height: 100%;
+}
+.Mainheading{
+    width: 90%;
+    margin: 0px auto;
+}
+.recommendation{
+    width: 90%;
+    height: auto;
+    background-color: #F5F6F7;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px auto 10px auto;
+    border: 1px rgb(196, 196, 186) solid;
+}
+.recommendationHead{
+    margin-left: 30px;
+    padding: 20px;
+    width: 90%;
+}
+.paraContainer{
+    margin-right: 100px;
+}
+.checktheimportant{
+    border-top: 1px rgb(196, 196, 186) solid;
+    height: 60px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+}
+.Check{
+
+    color: green;
+    font-size: 1.5rem;
+    position: relative;
+    right: 10px;
+}
+
+.iconcontainer{
+    margin-left: 50px; 
+}
+.secondpara{
+    padding-top: 10px;
+    color: #999b9e;
+}

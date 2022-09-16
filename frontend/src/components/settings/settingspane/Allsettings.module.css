@@ -1,0 +1,24 @@
+.seting{
+    color: #b9bec0;
+    font-size: 1.3rem;
+    float: left;
+}
+.mappingContainer{
+    height: 100%;
+    overflow-y: hidden;
+}
+.container{
+
+    padding: 20px;
+    margin: 10px 0px;
+    transition: all;
+    transition-duration:1s;
+}
+.container:hover{
+    background-color: #dddedf;
+}
+.settingdescription{
+    font-weight: 700;
+    margin-left: 30px;
+    font-size: 1rem;
+}

@@ -1,0 +1,22 @@
+.thisdiv{
+    display: flex;
+    justify-content: space-around;
+    /* background-color: green; */
+}
+.thisdiv > input{
+    /* background-color: aliceblue; */
+    outline: none;
+    width: 20px;
+    height: 20px;
+}
+.termsandcondi{
+    width: 90%;
+    text-align: center;
+    margin: 10px auto 10px auto;
+}
+
+.label{
+    font-size: 1.6rem;
+    margin-top: 10px ;
+
+}

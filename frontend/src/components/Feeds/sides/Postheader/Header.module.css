@@ -1,0 +1,15 @@
+.Header{
+    display: flex;
+    position: relative;
+}
+.CrudPost{
+    height: 40px;
+    width: 40px;
+    background-color: yellow;
+    position: absolute;
+    right: 10px;
+    border-radius:50% ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

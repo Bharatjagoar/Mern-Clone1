@@ -1,0 +1,21 @@
+.OuterBody{
+    background-color: yellow;
+    margin: 5px auto;
+    box-sizing: border-box;
+    height: auto;
+}
+.imagecontainer{
+    background-repeat: no-repeat;
+    background-size: cover; 
+    height: 400px;
+    width: 100%;
+}
+.imageTag{
+    width: 100%;
+    height: 100%;
+
+}
+.captionPara{
+    margin: 10px auto;
+    width: 95%;
+}   

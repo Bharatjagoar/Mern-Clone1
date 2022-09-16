@@ -1,0 +1,13 @@
+.containerDiv{
+    height: 103%;
+    width: 300px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+}
+.headone{
+    font-size: 25px;
+    margin: 10px 0px 0px 20px;
+    /* color: yellow;   */
+    font-family: sans-serif;
+    
+}

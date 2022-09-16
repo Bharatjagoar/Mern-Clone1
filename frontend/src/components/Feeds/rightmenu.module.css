@@ -1,0 +1,64 @@
+.right{
+    width: 20%;
+    display:flex;
+    justify-content: space-around;
+}
+.outerside{
+    border-radius: 50%;
+    margin-top: 5px;
+    width: 40px;
+    height: 70%;
+    background-color: #E4E6EB;
+}
+.outerside:hover{
+    background-color: #D8DADF;
+    cursor: pointer;
+}
+.rightFonticons{
+    position: relative;
+    margin-top: 30%;
+    display: inline-block;
+    font-size: 20px;
+}
+.ProfileBtn{
+    border: none;
+    transition: all 1s ;
+}
+.ProfileBtn:hover{
+    cursor: pointer;
+}
+.ProfileSetting{
+    margin-top: 15px;
+    float: right;
+    border-radius: 5px;
+    height: auto;
+    width: 200px;
+    animation-name: bharat;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    position: relative;
+    z-index: 1;
+}
+@keyframes bharat {
+    0%{
+        width: 0px;
+    }
+    100%{
+        width: 200px;
+    }
+}
+.ProfileMenu{
+    width: 100%;
+    background-color: white;
+}
+.ProfileMenu button{
+    border: none;
+    height: 100%;
+    width: 100%;
+    font-size: 25px;
+    color: #26282C;
+}
+.ProfileMenu hr{
+    width: 70%;
+
+}

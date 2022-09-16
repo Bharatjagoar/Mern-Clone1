@@ -1,0 +1,59 @@
+.heading{
+    width: 90%;
+    /* background-color: darkslategray; */
+    margin: 0px auto;
+}
+.outerMostcontainer{
+    padding: 10px 20px;
+    /* background-color: green; */
+    width: 90%;
+    margin: 10px auto ;
+    border-radius: 10px;
+    box-sizing: border-box;
+    /* background-color: aqua; */
+    border: 1px solid rgb(179, 176, 176);
+    overflow: hidden;
+    height: 300px;
+}
+.maincontainer{
+    position: relative;
+    width: 90%;
+    margin: 0px auto;
+    background-color: brown;
+    overflow: hidden;
+    height: 90%;
+    margin-top: 50px;
+}
+.MappingContainer{
+    /* background-color: blue; */
+    width: 105%;
+    overflow-y: auto;
+    height:100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+.MapperDiv{
+    /* background-color: black; */
+    width: 95%;
+    display: flex;
+    /* justify-content: space-around; */
+    /* background-color: rebeccapurple; */
+    margin: 10px 0px 0px 0px;
+    height: 80px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.logoDiv{
+    /* margin-right: 100px; */
+    /* background-color: red; */
+    width: 15%;
+}
+.logos{
+    width: 50%;
+    height: 50%;
+}
+.Devicedetails{
+    /* background-color: cadetblue; */
+    width: 70%;
+    margin-left: 30px;
+}
