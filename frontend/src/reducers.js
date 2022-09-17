@@ -27,6 +27,5 @@ export const custom = createReducer(initialstate,{
     InputBox:(state,action)=>{
         state.InputDialougeBox=action.payload
     }
-
 })
 

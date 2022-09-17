@@ -10,8 +10,8 @@ function CropperReact(){
     const [croppeArea,setCroppeArea]=useState(null)
     const [crop,setCrop]=useState({x:0,y:0})
     const [zoom,setZoom]=useState(1)
-    const [srcscs,setsrcscs]=useState(null)
     const chooseFile=useRef();
+    const [objectssxios,setobjectssxios]=useState({});
     function ChooseClicked(){
         chooseFile.current.click()
     }
@@ -36,15 +36,15 @@ function CropperReact(){
         setZoom(e.target.value)
         console.log("change")
     }
-    function download (){
-        var resultsssss= generateDownload(image,croppeArea)
-        console.log(resultsssss,"this is the blob")
-        resultsssss.then((res)=>{
-            console.log(res)
-        })
-        resultsssss.catch((err)=>{
-            console.log(err)
-        })
+    async function  download (){
+        var windows=await generateDownload(image,croppeArea,setobjectssxios)
+        setTimeout(() => {
+            console.log("timeout")
+        }, 1000);
+        console.log(windows,"mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+    }
+    function hidetheComponent(eve){
+        setimage(false)
     }
 
     return <div className={updateDPCss.container}>
@@ -56,8 +56,9 @@ function CropperReact(){
             <input type="range" onChange={(e)=>{triggerRange(e)}} min={0} max={3}/>
             <button onClick={(e)=>{ChooseClicked(e)}} >choose</button>
             <button onClick={download}>download</button>
+            <button onClick={(e)=>{hidetheComponent()}}> cancel</button>
         </div>
-    
+        <img src="" id="myimage" alt="" />
     </div>
 }
 

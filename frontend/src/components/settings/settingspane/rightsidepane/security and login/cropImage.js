@@ -1,3 +1,7 @@
+import axios from "axios";
+
+
+
 const createImage = (url) =>
 	new Promise((resolve, reject) => {
 		const image = new Image();
@@ -54,16 +58,17 @@ export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
 	return canvas;
 }
 
-export const generateDownload = async (imageSrc, crop) => {
+const generateDownload = async (imageSrc, crop,setobjectssxios) => {
+	
 	if (!crop || !imageSrc) {
 		return;
 	}
-
+	
 	const canvas = await getCroppedImg(imageSrc, crop);
 	// console.log(canvas,"this is the canvas");
 	// console.log(canvas.toDataURL(),)
-	canvas.toBlob(
-		(blob) => {
+	await canvas.toBlob(
+		async (blob) => {
 			const previewUrl = window.URL.createObjectURL(blob);
 			
 			const anchor = document.createElement("a");
@@ -73,12 +78,28 @@ export const generateDownload = async (imageSrc, crop) => {
 			// anchor.click();
 
 			window.URL.revokeObjectURL(previewUrl);
+			let filef=new File([blob], "filename.jpeg", {type: "text/json;charset=utf-8"});
+			// console.log(blob,"ths is blbb")
+			// console.log(filef,"this is the file")
+			const data = new FormData()
+        	data.append("file",filef)
+        	data.append("upload_preset","lbsiqzlz")
+
+			const cloudObjectpush= await axios.post("https://api.cloudinary.com/v1_1/dyjngm7az/image/upload",data,{withCredentials:false})	
+			console.log(cloudObjectpush,"fdabjbjfkdsa bkfd sa")
+
+			setobjectssxios(cloudObjectpush.data)
 			
 		},
 		"image/jpeg",
 		0.66
 	);
-	return canvas
 };
+
+
+
+export {generateDownload}
+
+
 
 
