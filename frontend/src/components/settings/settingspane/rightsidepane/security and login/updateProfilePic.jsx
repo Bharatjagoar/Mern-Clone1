@@ -3,21 +3,21 @@ import { useRef } from "react";
 import updateDPCss from "./updateProfilePic.module.css"
 import Cropper from "react-easy-crop"
 import { useState } from "react";
+import {useDispatch} from "react-redux"
 import {generateDownload} from "./cropImage";
 
 function CropperReact(){
+    const dispatch=useDispatch()
     const [image,setimage]=useState(null)
     const [croppeArea,setCroppeArea]=useState(null)
     const [crop,setCrop]=useState({x:0,y:0})
     const [zoom,setZoom]=useState(1)
     const chooseFile=useRef();
-    const [objectssxios,setobjectssxios]=useState({});
+    const [objectssxios,setobjectssxios]=useState(null);
     function ChooseClicked(){
         chooseFile.current.click()
     }
     const oncropComplete=(CroppeAreapercentage,cropareapixels)=>{
-        // console.log(CroppeAreapercentage)
-        // console.log(cropareapixels)
         setCroppeArea(cropareapixels)
     }
     const onselectafile=(e)=>{
@@ -37,14 +37,20 @@ function CropperReact(){
         console.log("change")
     }
     async function  download (){
-        var windows=await generateDownload(image,croppeArea,setobjectssxios)
-        setTimeout(() => {
-            console.log("timeout")
-        }, 1000);
-        console.log(windows,"mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+        generateDownload(image,croppeArea,setobjectssxios)
     }
     function hidetheComponent(eve){
         setimage(false)
+    }
+    if(objectssxios){
+        console.log(objectssxios.secure_url)
+        dispatch({
+            type:"Displaypicture",
+            payload:objectssxios.secure_url
+        })
+    }
+    else{
+        console.log("not found")
     }
 
     return <div className={updateDPCss.container}>

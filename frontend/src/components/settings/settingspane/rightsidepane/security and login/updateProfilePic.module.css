@@ -1,11 +1,10 @@
 .containerCropper{
-    width: 100%;
+    width: 60%;
     height: 400px;
     position: relative;
     margin: 0px auto;
 }
 .cropper{
-    /* width: 70%; */
     height: 20%;
     position: relative;
     background-color: aliceblue;

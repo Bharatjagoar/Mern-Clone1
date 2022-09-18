@@ -67,7 +67,7 @@ const generateDownload = async (imageSrc, crop,setobjectssxios) => {
 	const canvas = await getCroppedImg(imageSrc, crop);
 	// console.log(canvas,"this is the canvas");
 	// console.log(canvas.toDataURL(),)
-	await canvas.toBlob(
+	canvas.toBlob(
 		async (blob) => {
 			const previewUrl = window.URL.createObjectURL(blob);
 			
@@ -86,10 +86,8 @@ const generateDownload = async (imageSrc, crop,setobjectssxios) => {
         	data.append("upload_preset","lbsiqzlz")
 
 			const cloudObjectpush= await axios.post("https://api.cloudinary.com/v1_1/dyjngm7az/image/upload",data,{withCredentials:false})	
-			console.log(cloudObjectpush,"fdabjbjfkdsa bkfd sa")
-
-			setobjectssxios(cloudObjectpush.data)
 			
+			setobjectssxios(cloudObjectpush.data)
 		},
 		"image/jpeg",
 		0.66

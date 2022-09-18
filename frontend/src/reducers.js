@@ -5,6 +5,7 @@ const initialstate={
     year:null,
     Months:null,
     Sess:null,
+    Dp:null,
     InputDialougeBox:null
 }
 
@@ -26,6 +27,9 @@ export const custom = createReducer(initialstate,{
     },
     InputBox:(state,action)=>{
         state.InputDialougeBox=action.payload
+    },
+    Displaypicture:(state,action)=>{
+        state.Dp=action.payload
     }
 })
 
