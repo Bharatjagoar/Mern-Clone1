@@ -31,6 +31,7 @@ function MajorInput(props){
     function captionsetting(e){
         setcaption(e.target.value)
     }
+    console.log(Sess    )
     function FilesInput(file){
         console.log(file,"this is thee file")
         setuploadPicture(file)

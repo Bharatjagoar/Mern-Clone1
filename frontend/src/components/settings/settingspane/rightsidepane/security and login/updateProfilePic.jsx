@@ -2,11 +2,14 @@ import React from "react";
 import { useRef } from "react";
 import updateDPCss from "./updateProfilePic.module.css"
 import Cropper from "react-easy-crop"
+import axios from "axios";
 import { useState } from "react";
 import {useDispatch} from "react-redux"
 import {generateDownload} from "./cropImage";
+import { useEffect } from "react";
 
 function CropperReact(){
+
     const dispatch=useDispatch()
     const [image,setimage]=useState(null)
     const [croppeArea,setCroppeArea]=useState(null)
@@ -14,6 +17,20 @@ function CropperReact(){
     const [zoom,setZoom]=useState(1)
     const chooseFile=useRef();
     const [objectssxios,setobjectssxios]=useState(null);
+
+    useEffect(()=>{
+        if(objectssxios){
+            dispatch({
+                type:"Displaypicture",
+                payload:objectssxios.secure_url
+            })
+        }
+        
+    },[objectssxios])
+
+
+
+
     function ChooseClicked(){
         chooseFile.current.click()
     }
@@ -43,14 +60,21 @@ function CropperReact(){
         setimage(false)
     }
     if(objectssxios){
-        console.log(objectssxios.secure_url)
-        dispatch({
-            type:"Displaypicture",
-            payload:objectssxios.secure_url
+        // objectssxios.secure_url
+        console.log("fdsanjk")
+        axios.post("http://localhost:5000/User/updateProfilePicture",{
+            url:objectssxios.secure_url
         })
-    }
-    else{
-        console.log("not found")
+        .then((res)=>{
+            console.log(res.data)
+        })
+        .catch((err)=>{
+            console.log(err)
+            console.log("error found")
+        })
+        
+        console.log(objectssxios.secure_url)
+        
     }
 
     return <div className={updateDPCss.container}>

@@ -19,7 +19,6 @@ function Leftside(){
         e.preventDefault();
         console.log("window 10 !!")
     }
-
     function openmaininput(){
         dispatch({
             type:"InputBox",

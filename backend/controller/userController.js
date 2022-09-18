@@ -129,3 +129,23 @@ module.exports.GettheUserDevices= async (req,res)=>{
     
     console.log(req.params.id)
 }
+
+module.exports.UpdateProfilePicture= async(req,res)=>{
+    console.log("update")
+    console.log(req.session.user)
+    console.log(req.body,"paratms")
+
+
+
+    try {
+        const updatedDoc= await UserDB.findByIdAndUpdate(req.session.user,
+                {displayPicture:req.body.url},
+                {new:true}
+            )
+            console.log(updatedDoc,"this is the update doc")
+    } catch (error) {
+        console.log(error)
+        console.log("this is the error")
+    }
+    res.send()
+}

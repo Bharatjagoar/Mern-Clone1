@@ -8,6 +8,7 @@ router.post("/logout",usercontroller.logOut)
 router.patch("/UpdateInfoName/:id",usercontroller.updateName);
 router.get("/Getthedevices",usercontroller.GettheUserDevices)
 router.post("/DeviceNamestorage",usercontroller.userDeviceDetail);
+router.post("/updateProfilePicture",usercontroller.UpdateProfilePicture)
 // router.get("/logout")
 
 

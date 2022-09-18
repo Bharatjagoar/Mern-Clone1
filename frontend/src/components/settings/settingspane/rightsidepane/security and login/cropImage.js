@@ -86,7 +86,6 @@ const generateDownload = async (imageSrc, crop,setobjectssxios) => {
         	data.append("upload_preset","lbsiqzlz")
 
 			const cloudObjectpush= await axios.post("https://api.cloudinary.com/v1_1/dyjngm7az/image/upload",data,{withCredentials:false})	
-			
 			setobjectssxios(cloudObjectpush.data)
 		},
 		"image/jpeg",

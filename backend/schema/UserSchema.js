@@ -26,6 +26,9 @@ const userschema=Mongoose.Schema({
     },
     year:{
         type:"String"
+    },
+    displayPicture:{
+        type:"String",
     }
 },
     {timestamps:true}
