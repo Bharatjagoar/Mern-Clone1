@@ -25,7 +25,6 @@ function CropperReact(){
                 payload:objectssxios.secure_url
             })
         }
-        
     },[objectssxios])
 
 

@@ -4,8 +4,8 @@
     float: left;
 }
 .mappingContainer{
-    height: 100%;
-    overflow-y: hidden;
+    height: 95vh;
+    overflow-y: scroll;
 }
 .container{
 
