@@ -48,16 +48,17 @@
     /* background-color: rebeccapurple; */
     border-bottom: 1px solid rgb(151, 155, 151);
     margin: 10px 0px 0px 0px;
-    height: 80px;
-    padding: 15px 10px 0px 10px;
-    box-sizing: border-box;
+    height: 50px;
+    padding: 15px 10px 10px 10px;
+
 }
 .logoDiv{   
-    width: 14%;
+    width: 10%;
+    /* background-color: aqua; */
 }
 .logos{
-    width: 50%;
-    height: 50%;
+    width: 75%;
+    height: 90%;
 }
 .Devicedetails{
     /* background-color: cadetblue; */
