@@ -9,6 +9,7 @@ router.patch("/UpdateInfoName/:id",usercontroller.updateName);
 router.get("/Getthedevices",usercontroller.GettheUserDevices)
 router.post("/DeviceNamestorage",usercontroller.userDeviceDetail);
 router.post("/updateProfilePicture",usercontroller.UpdateProfilePicture)
+router.post("/updatePassword",usercontroller.UpdatePassword)
 // router.get("/logout")
 
 

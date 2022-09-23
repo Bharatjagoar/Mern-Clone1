@@ -149,3 +149,19 @@ module.exports.UpdateProfilePicture= async(req,res)=>{
     }
     res.send()
 }
+
+
+module.exports.UpdatePassword=async (req,res)=>{
+    console.log(req.session.user._id)
+    console.log(req.body)
+    try {
+        const DocumentFound=await UserDB.findById(req.session.user._id)
+        if(DocumentFound){
+            console.log(DocumentFound.password)
+            return res.send()       
+        }
+    } catch (error) {
+        console.log(error,"this the password updation block !! ")
+        return res.send(error)
+    }
+}
