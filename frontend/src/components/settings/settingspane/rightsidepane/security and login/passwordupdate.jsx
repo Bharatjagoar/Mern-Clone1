@@ -7,16 +7,15 @@ import { useState } from "react";
 
 
 function Password(){
-    const [cancel,setcancel]= useState(false)
+    const [cancel,setcancel]= useState(true)
     
     function BtnClicked(){
-        console.log("btn clicked ")
         setcancel(false)
     }
     
     return <div className={PasswordupdateCss.outerMostdiv}>
         <div className={PasswordupdateCss.headingContainer}>
-            <h3 className={PasswordupdateCss.heading}>Password</h3>
+            <h4 className={PasswordupdateCss.heading}>Password</h4>
         </div>
         <div className={PasswordupdateCss.content}>
             <div className={PasswordupdateCss.contentdivone}>
@@ -27,7 +26,7 @@ function Password(){
                 <>
                 <h4>Change password</h4>
                 <p>It's a good idea to use a strong password that you don't use elsewhere</p>
-            </>:<ChangePassword funct={setcancel}/>}
+            </>:<ChangePassword funct={(bool)=>setcancel(bool)}/>}
                 
             </div>
             <div className={PasswordupdateCss.contentdivthree}>

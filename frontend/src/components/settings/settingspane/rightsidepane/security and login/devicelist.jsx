@@ -13,7 +13,6 @@ function DevicesNames(){
     useEffect( ()=>{
         const devicesRes= axios.get("http://localhost:5000/User/Getthedevices")
         devicesRes.then((res)=>{
-            console.log(res.data)
             setdevices(res.data)
         })
         devicesRes.catch((err)=>{
@@ -21,7 +20,6 @@ function DevicesNames(){
         })
     },[])
     function src(item){
-        console.log(item,"fda")
         var srcs=""
         switch (item.os) {
             case "Windows":

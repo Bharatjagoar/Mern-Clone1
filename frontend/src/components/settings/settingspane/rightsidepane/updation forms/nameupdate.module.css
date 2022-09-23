@@ -1,8 +1,10 @@
 .forum{
     width: 100%;
-    height: 200px;
+    max-width: 270px;
+    max-height: 20  0px;
     padding: 20px 10px;
-    background-color: #cfcccc;
+    background-color: #F2F2F2;
+    margin: 0px auto;    
 }
 .headingOftheForm{
     text-align: center;

@@ -49,7 +49,8 @@ function SignupButton(props){
                     toast.info("user already exist !",
                     {
                         position:toast.POSITION.BOTTOM_LEFT,
-                        autoClose:  1000
+                        autoClose:  1000,
+                        theme:"colored"
                 }
                     )
                 }
