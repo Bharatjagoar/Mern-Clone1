@@ -44,7 +44,7 @@ function NameUpdate(props){
         setlname(e.target.value)
         console.log(lname)
     }
-    return <div>
+    return <div className="">
         <form method="put" action="" className={NameUpdateCss.forum}>
             <h3 className={NameUpdateCss.headingOftheForm}>Name update </h3>
             <input onChange={(e)=>{Fnameon(e)}} className={NameUpdateCss.inputData} type="text" placeholder="enter the first name"/>

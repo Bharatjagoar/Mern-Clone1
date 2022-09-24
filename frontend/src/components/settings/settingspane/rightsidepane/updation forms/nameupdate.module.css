@@ -1,14 +1,17 @@
 .forum{
     width: 100%;
     max-width: 270px;
-    max-height: 20  0px;
+    height: 210px;
     padding: 20px 10px;
-    background-color: #F2F2F2;
-    margin: 0px auto;    
+    background-color: #bdbdbd;
+    padding-top: 20%;
+    position: relative;
+    left: 50%;
+    border-radius: 10px;
 }
 .headingOftheForm{
     text-align: center;
-    color: #0D8AF0;
+    color: #4267B2;
 }
 .inputData{
     font-size: 1rem;
@@ -31,7 +34,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0D8AF0;
+    background-color: #4267B2;
     height: 30px;
     border-radius: 5px;
     font-size: 1rem;

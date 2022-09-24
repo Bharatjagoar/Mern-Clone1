@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import NameUpdateCss from "./nameupdate.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faEye,faEyeSlash} from "@fortawesome/free-solid-svg-icons"
-import { useEffect } from "react";
+
 
 
 toast.configure()
@@ -19,10 +19,7 @@ function ChangePassword({funct}){
     const [oldpassword,setoldpassword]=useState()
     const [newPassword,setnewPassword]=useState()
     const [confirm,setconfirm]=useState()
-    const [newicon,setnewicon] =useState(true)
-    const [oldicon,setoldicon] =useState(true)
-    const [confirmicon,setconfirmicon] =useState(true)
-
+    
     function old(e){
         setoldpassword(e.target.value)
         
@@ -39,6 +36,19 @@ function ChangePassword({funct}){
 
 
     function submitBtn(){
+        console.log(oldpassword,"fdsafdasfdsafdsafdsafdsa")
+        if(oldpassword==null|| newPassword==null|| confirm== null){
+            console.log("windows 10 ")
+            toast.info("All are required fields ! ",
+                {theme:"colored",
+            autoClose:3000}
+            )
+            setTimeout(() => {
+                funct(true)                
+            }, 2000);
+
+            return
+        }
         if(confirm!=newPassword){
             console.log("fdas")
             toast.info("Confirm password didnt matched",{
@@ -55,20 +65,33 @@ function ChangePassword({funct}){
         }
         let Passwordstring=String(newPassword)
         console.log(Passwordstring.length)
-        if(Passwordstring.length<8){
-            console.log("nt secured")
-            toast.warn("Set a secured password !!",
-            {
-                theme:"colored"
-            })
-            return
-        }
+        // if(Passwordstring.length<8){
+        //     console.log("nt secured")
+        //     toast.warn("Set a secured password !!",
+        //     {
+        //         theme:"colored"
+        //     })
+        //     return
+        // }
         axios.post("http://localhost:5000/User/updatePassword",{
             old:oldpassword,
             new:newPassword
         })
         .then((respose)=>{
             console.log(respose)
+            console.log(respose.data.message)
+            if(respose.data.message===false){
+                toast.error(
+                    "Incorrect Password"
+                ,{position:toast.POSITION.TOP_RIGHT,
+                theme:"colored"})
+            }else{
+                toast.success("Password changed successfully ",{
+                    position:toast.POSITION.TOP_RIGHT
+                })
+            }
+            funct(true)
+
         })
         .catch((err)=>{
             console.log(err)
@@ -92,7 +115,7 @@ function ChangePassword({funct}){
     }
     return <div>
             <div>
-            <form action="" className={NameUpdateCss.forum}>
+            <form action="" className={PasswordChangeCss.forum}>
             <h3 className={NameUpdateCss.headingOftheForm}>Password change</h3>
             <div className={PasswordChangeCss.inputContainer}>
                 <div className={PasswordChangeCss.ConatinerINputAndICon}>

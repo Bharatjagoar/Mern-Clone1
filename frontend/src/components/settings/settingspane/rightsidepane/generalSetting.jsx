@@ -34,9 +34,9 @@ function GeneralSetting(){
             <div className={generalSettingCss.GeneralsettingDescription}>
                 {array.map((item,pos)=>{
                     return <div key={pos} className={generalSettingCss.innercontainerGeneral}>
-                        <div className={generalSettingCss.onediv}><p>{item.Name}</p></div>
+                        {pos==0&&username?null:<div className={generalSettingCss.onediv}><p>{item.Name}</p></div>}
                     <div className={generalSettingCss.twodiv}>{username&&pos===0?<NameUpdate func={removetheform}/>:<p>{item.data}</p>}</div>
-                    <div className={generalSettingCss.threediv}>{!username?<p onClick={()=>{thisEdit(item)}} style={pos==0?{cursor:"pointer"}:{cursor:"none"}}>Edit</p>:null}</div>
+                    <div className={generalSettingCss.threediv}>{!username?<p onClick={()=>{thisEdit(item)}} style={{cursor:"pointer"}}>Edit</p>:null}</div>
                     </div>
 
                 })}

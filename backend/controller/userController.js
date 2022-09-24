@@ -30,11 +30,14 @@ module.exports.createuser=async (req,res)=>{
     }
 }
 module.exports.LoginUser=async (req,res)=>{
-    const Loginuser = await UserDB.findOne({UserName:req.body.username,password:req.body.password})
+    let FoundLoginuser = await UserDB.findOne({UserName:req.body.username,password:req.body.password})
+    .select(["-createdAt","-updatedAt","-year","-month","-date","-password","-__v"])
 
-    if(Loginuser){  
-        console.log("hellow owrld ")
-        req.session.user = Loginuser
+    if(FoundLoginuser){  
+        console.log(FoundLoginuser)
+        // delete FoundLoginuser.password
+        console.log(FoundLoginuser,"this is th user found")
+        req.session.user = FoundLoginuser
         return res.send({message:true})
     }else{
         return res.send({
@@ -47,7 +50,6 @@ module.exports.SessionCheck = (req,res)=>{
     if(req.session.user){
         res.send({message:true,user:req.session.user})
     }else{
-        console.log("nilll")
         res.send({message:false})
     }
 }
@@ -80,8 +82,6 @@ module.exports.updateName= async (req,res)=>{
 
 module.exports.userDeviceDetail= async(req,res)=>{
     // console.log("Device details ! ");
-    console.log("this is is desc",req.body.DeviceDetail.description)
-    console.log("thos are version",req.body.DeviceDetail.os.family)
     // console.log("this is name",req.body.DeviceDetail.name )
     // console.log("this is name",req.body.DeviceDetail.version )
     // console.log(req.session.user._id,"this the session ")
@@ -98,8 +98,6 @@ module.exports.userDeviceDetail= async(req,res)=>{
                     // Device:req.body.DeviceDetail.description
                 }},{new:true}
             )
-            console.log("this is the updated")
-            console.log(foundbyid)
         }
         else{
             const created= await devicedb.create({User:req.session.user._id})
@@ -155,13 +153,29 @@ module.exports.UpdatePassword=async (req,res)=>{
     console.log(req.session.user._id)
     console.log(req.body)
     try {
-        const DocumentFound=await UserDB.findById(req.session.user._id)
+        const DocumentFound=await UserDB.findOne(
+            {   _id:req.session.user._id,
+                password:req.body.old
+            })
+            .select("_id")
         if(DocumentFound){
-            console.log(DocumentFound.password)
-            return res.send()       
+            try {
+                const passwordupdatedDoc= await UserDB.findByIdAndUpdate(DocumentFound,{
+                    password:req.body.new
+                },{new:true})
+                console.log(passwordupdatedDoc)
+            } catch (error) {
+                console.log(error,"thi is from findbyidandupdate")
+                res.send()
+            }
+            
+            return res.send({message:true})
+        }
+        else{
+            return res.send({message:false})
         }
     } catch (error) {
         console.log(error,"this the password updation block !! ")
-        return res.send(error)
+        return res.send({message:false})
     }
 }

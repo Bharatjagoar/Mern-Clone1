@@ -19,7 +19,7 @@ function Password(){
         </div>
         <div className={PasswordupdateCss.content}>
             <div className={PasswordupdateCss.contentdivone}>
-                <FontAwesomeIcon icon={faKey} className={PasswordupdateCss.KeyIcon}/>
+                {cancel?<FontAwesomeIcon icon={faKey} className={PasswordupdateCss.KeyIcon}/>:null} 
             </div>
             <div className={PasswordupdateCss.contentdivtwo}>
                 {cancel?

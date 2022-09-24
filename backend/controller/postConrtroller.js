@@ -18,7 +18,7 @@ module.exports.createPost = async (req, res) => {
   }
 };
 module.exports.GetPost= async(req,res)=>{
-  console.log("hello")
+
     try {
       const ress = await db.find({})
       res.send(ress)    
@@ -42,7 +42,6 @@ module.exports.Delete = async (req,res)=>{
 }
 module.exports.deleteThisCloudinary = async (req,res)=>{
     console.log(req.query.post)
-    console.log("hello")
     Cloudinary.config({ 
         cloud_name: 'dyjngm7az', 
         api_key: '173268382419118', 
