@@ -1,12 +1,30 @@
 .Header{
     display: flex;
     position: relative;
+    background-color: yellow;   
+}
+.Name{
+    margin-left: 10%;
+}
+.Addfriend{
+    background-color: aliceblue;
+    position: absolute;
+    right: 0;   
+    width: 15%; 
+}
+.IconAddfriend{
+    color:green;
+    font-size: 1.8rem;
+    position: absolute;
+    right: 0;
 }
 .CrudPost{
+    position: absolute;
+    left: 40%;
+    top: 0px;
     height: 40px;
     width: 40px;
     background-color: yellow;
-    position: absolute;
     right: 10px;
     border-radius:50% ;
     display: flex;

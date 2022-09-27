@@ -16,12 +16,14 @@ const Posts = () => {
       setarr(result.data);
     });
   }, []);
+  console.table(arr)
   return (
     <div className={PostCSS.outerMostDiv}>
       {
-        
+
           arr.map(post=>{
               return <div key={post._id} className={PostCSS.container}>
+                {console.log(post._id)}
 					<PostHeader name={post.userName} created={post.createdAt} Post={post._id} media={post.mediaId} user={post.userId}/>
 					<PostBody src={post.mediaUrl} caption={post.caption}/>
               </div>

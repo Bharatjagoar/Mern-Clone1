@@ -46,8 +46,18 @@ function InsidePrivacy(){
                         </div>
                         
                         <div className={InsidePrivacyCss.YourActivityrightDivsubcontainer}>
-                            fdsfds
+                            <p style={{width:"50%"}}>review all your posts and things you are tagged in </p>
+                            <div className={InsidePrivacyCss.UseactivitylogContainer}>
+                                <p>use activity log</p>
+                            </div>
                         </div>
+                        <div className={InsidePrivacyCss.YourActivityrightDivsubcontainer}>
+                            <p style={{width:"50%"}}>Limit the audience for posts you've shared with friends of friends or Public?</p>
+                            <div className={InsidePrivacyCss.UseactivitylogContainer}>
+                                <p>limit past posts </p>
+                            </div>
+                        </div>
+
                     </div>
                     
                 </div>

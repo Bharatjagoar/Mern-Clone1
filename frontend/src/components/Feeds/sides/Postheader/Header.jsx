@@ -3,7 +3,8 @@ import HeaderPost from "./Header.module.css"
 import DisplayPicture from "../DisplayPicture";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {
-    faTrash
+    faTrash,
+    faUserPlus
 } from "@fortawesome/free-solid-svg-icons"
 import Axios from "axios";
 import { useSelector} from "react-redux"
@@ -31,14 +32,19 @@ function PostHeader({name,created,Post,media,user}){
         })
     }
 
-    console.log()
+    console.log(user)
     return <div className={HeaderPost.Header}>
         <DisplayPicture />
-        <div>
-            {name} <br />
-            <div><p></p></div>
+        <div >
+            <p className={HeaderPost.Name}>{name} </p> 
         </div>
-        {Sess._id===user?deletethisPost():null}
+        
+        
+            {Sess._id===user?deletethisPost():<FontAwesomeIcon icon={faUserPlus} className={HeaderPost.IconAddfriend}/>} 
+        
+          
+        
+        
     </div>
 }
 

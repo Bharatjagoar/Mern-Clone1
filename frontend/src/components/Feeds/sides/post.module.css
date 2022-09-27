@@ -9,4 +9,6 @@
     background-color: red;
     width:  80%;
     margin: 5px auto;
+    padding: 10px;
+    box-sizing: border-box;
 }
