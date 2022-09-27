@@ -1,0 +1,83 @@
+.OuterMostdiv{
+    height: 100vh;
+    background-color: #FFFFFF;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.contentContainerDiv{
+    height: 90%;
+    overflow-y: scroll;
+    width: 105%;
+}
+.hedingcontainer{
+    width: 90%;
+    margin: 0px auto;
+    border-bottom: 1px solid rgb(112, 110, 110);
+    padding-bottom: 20px;
+}
+/* .Componentheading{
+    width: 90%;
+    margin: 0px auto;
+} */
+
+
+.generasubcontainerDiv{
+   width: 90%; 
+   margin: 10px auto;
+   /* background-color: yellow; */
+   display: flex;
+   justify-content: center;
+   border-bottom: 1px solid rgb(112, 110, 110);
+}
+.Privacyshortcutsleft{
+    width: 30%;
+    /* background-color: red; */
+    padding-top: 20px;
+}
+.Privacyshortcutsleft h3{
+    margin: 0px auto;
+    width: 80%;
+}
+.Privacyshortcutsright{
+    width: 70%;
+    /* background-color: green; */
+    padding: 10px;
+}
+.contenDiv{
+    width: 100%;
+    /* background-color: aliceblue; */
+    transition: all 1s;
+    margin-bottom: 10px;
+    padding: 5px  10px;
+}
+.contenDiv:hover{
+    background-color: #cbccce;
+}
+
+.YourActivityLeftDiv{
+    /* background-color: rebeccapurple; */
+    width: 30%;
+}
+.YourActivityLeftDiv h3{
+    padding-top: 20px;
+    width: 90%;
+    text-align: center;
+}
+.YourActivityrightDiv{
+    width: 70%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: hotpink;
+    /* display: flex; */
+    justify-content: space-around;
+}
+.YourActivityrightDivsubcontainer{
+    background-color: green;
+    display: flex;
+    width: 100%;
+    height: 60px;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px auto;
+}

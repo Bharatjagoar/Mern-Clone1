@@ -1,10 +1,12 @@
 import React from "react";
+import privacyCss from "./privacy.module.css"
+import InsidePrivacy from "./privacy/InsidePrivacy";
 
 function Privacy(){
 
-    return <h1>
-        hello Privacy
-    </h1>
+    return <div className={privacyCss.NoneDiv}>
+        <InsidePrivacy/>
+    </div>
 }
 
 export default Privacy;
