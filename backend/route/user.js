@@ -10,6 +10,7 @@ router.get("/Getthedevices",usercontroller.GettheUserDevices)
 router.post("/DeviceNamestorage",usercontroller.userDeviceDetail);
 router.post("/updateProfilePicture",usercontroller.UpdateProfilePicture)
 router.post("/updatePassword",usercontroller.UpdatePassword)
+router.patch("/AddFriend/:id",usercontroller.addFriend)
 // router.get("/logout")
 
 

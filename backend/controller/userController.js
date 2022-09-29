@@ -179,3 +179,18 @@ module.exports.UpdatePassword=async (req,res)=>{
         return res.send({message:false})
     }
 }
+
+
+
+module.exports.addFriend= async (req,res)=>{
+    console.log("req body",req.session.user._id)
+    console.log("req params ",req.params)
+
+
+    try {
+        const userFound = await UserDB.findById(req.session.user._id)
+    } catch (error) {
+        
+    }
+    res.send()
+}

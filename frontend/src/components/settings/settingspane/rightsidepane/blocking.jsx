@@ -4,7 +4,7 @@ import ChangePassword from "./updation forms/passwordChange";
 function Blocking(){
 
     return <div>
-        <h1>block !! </h1>
+        <CropperReact/>
     </div> 
 }
 

@@ -4,7 +4,10 @@
     background-color: yellow;   
 }
 .Name{
-    margin-left: 10%;
+    margin-top: 10px;
+    padding-left: 10px;
+    width: auto;
+    font-weight: 600;
 }
 .Addfriend{
     background-color: aliceblue;
@@ -19,14 +22,13 @@
     right: 0;
 }
 .CrudPost{
-    position: absolute;
-    left: 40%;
-    top: 0px;
     height: 40px;
     width: 40px;
-    background-color: yellow;
+    background-color: rebeccapurple;
     right: 10px;
     border-radius:50% ;
+    position: absolute;
+    right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;

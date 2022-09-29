@@ -4,12 +4,16 @@ import DisplayPicture from "../DisplayPicture";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {
     faTrash,
-    faUserPlus
+    faUserPlus,
+    faCircleCheck
 } from "@fortawesome/free-solid-svg-icons"
 import Axios from "axios";
 import { useSelector} from "react-redux"
+import { useState } from "react";
+import axios from "axios";
 
 function PostHeader({name,created,Post,media,user}){
+    const[changeIcon,setchangeIcon]=useState(false)
     const {Sess}= useSelector(state=>state.custom)
     const date= new Date().getDate(created)
     const day =new Date().getDay(created)
@@ -32,17 +36,28 @@ function PostHeader({name,created,Post,media,user}){
         })
     }
 
-    console.log(user)
+    async function AddFriendClicked(){
+        console.log("fd")
+        setchangeIcon(true)
+        try {
+            const addFriend= await axios.patch("http://localhost:5000/User/AddFriend/"+user)
+            console.log(addFriend,"this is the add friend respo")
+        } catch (error){
+            console.log(error)
+            console.log("hello world !! ")
+        }
+    }
+
+
+    console.log(user,"userid id")
     return <div className={HeaderPost.Header}>
         <DisplayPicture />
         <div >
-            <p className={HeaderPost.Name}>{name} </p> 
+            <p className={HeaderPost.Name}>{name}</p> 
         </div>
         
         
-            {Sess._id===user?deletethisPost():<FontAwesomeIcon icon={faUserPlus} className={HeaderPost.IconAddfriend}/>} 
-        
-          
+            {Sess._id===user?deletethisPost():<FontAwesomeIcon icon={changeIcon?faCircleCheck:faUserPlus} onClick={()=>{AddFriendClicked()}} className={HeaderPost.IconAddfriend}/>} 
         
         
     </div>
