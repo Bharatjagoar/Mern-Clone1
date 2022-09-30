@@ -2,6 +2,12 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const path= require("path");
 const app = express();
+const http =require("http")
+const {Server}=require("socket.io")
+const server=new http.createServer(app)
+
+
+
 const cookieParser = require("cookie-parser")
 const db =require("./config/mongoose")
 const session = require("express-session")
@@ -12,6 +18,15 @@ app.use(cors({
     origin:"http://localhost:3000",
     credentials:true
 }))
+
+const io= new Server(server,{
+    cors:{
+        origin:"*",
+        methods:["GET","POST"]
+    }
+})
+
+const socketRouter = require("./route/home")(io)
 
 app.use(express.json())
 
@@ -33,8 +48,7 @@ app.use(session({
 
 
 
-
-app.use("/",require("./route/home"));
-app.listen("5000",'0.0.0.0',()=>{
+app.use("/",socketRouter);
+server.listen("5000",'0.0.0.0',()=>{
     console.log("port 5000")
 })

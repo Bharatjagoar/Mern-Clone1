@@ -189,6 +189,7 @@ module.exports.addFriend= async (req,res)=>{
 
     try {
         const userFound = await UserDB.findById(req.session.user._id)
+        console.log(userFound,"user")
     } catch (error) {
         
     }

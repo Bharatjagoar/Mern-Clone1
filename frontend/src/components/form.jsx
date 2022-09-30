@@ -22,12 +22,10 @@ function Form() {
   function LoginButton(e) {
     
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/User/login", {
+    axios.post("http://localhost:5000/User/login", {
         username: email,
         password: password,
-      })
-      .then((result) => {
+      }).then((result) => {
         if (result.data.message) {
           console.log(result.data.message, "messa");
             const SesResponse = axios.get("http://localhost:5000/User/loginSesion",{Credential:true});
@@ -43,10 +41,9 @@ function Form() {
                 console.log("error in device data storage");
                 console.log(err)
               })
-			      document.location.reload()
+			        document.location.reload()
             });
-
-          Navigate("/panes");
+            Navigate("/panes");
         } else {
           errorfunction();
         }

@@ -7,13 +7,13 @@ import panesCSS from "./panes.module.css"
 import Rightside from "./rightside";
 // import {} from ""
 
-function Panes(){
+function Panes({obj}){
     document.title="Facebook"
     
     return <div>
         <FeedsNavBar/>
         <div className={panesCSS.flex}>
-            <Leftside/>
+            <Leftside object={obj}/>
             <Rightside/>
         </div>
     </div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import io from "socket.io-client"
 import { BrowserRouter as Router, Route, Routes ,useNavigate} from "react-router-dom";
 import App from "./app";
 import Panes from "./components/Feeds/sides/panes";
@@ -15,7 +16,7 @@ import Privacy from "./components/settings/settingspane/rightsidepane/privacy";
 import ProfileAndTagging from "./components/settings/settingspane/rightsidepane/profileandtagging";
 import Publicpost from "./components/settings/settingspane/rightsidepane/publicpost";
 import Blocking from "./components/settings/settingspane/rightsidepane/blocking";
-
+const socket=io.connect("http://localhost:5000")
 
 
 function Routing() {
@@ -23,6 +24,9 @@ function Routing() {
   const [ses, setses] = useState();
   const dispatch = useDispatch();
   useEffect(() =>{
+      socket.on("hello",(socket)=>{
+          console.log(socket,"this is the socket")
+      })
       const SesResponse =  axios.get("http://localhost:5000/User/loginSesion", {
         withCredentials: true,
       });
@@ -37,13 +41,21 @@ function Routing() {
         console.log(err);
       })
   });
+
+  socket.on("hell",(socket)=>{
+    console.log(socket,"this is the socket")
+  })
+  socket.on("friendrequest",data=>{
+    console.log("data freind request data :: ",data)
+    alert(data,"room joined")
+  })
   return (
     <Router>
       <Routes>
         <Route path="/" element={ses ? <Panes /> : <App />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<Error />} />
-        <Route path="/panes" element={ses ? <Panes /> : <App />} />
+        <Route path="/panes" element={ses ? <Panes obj={socket} /> : <App />} />
         <Route path="/friends" element={ses?<Frineds />:<App/>} />
         <Route path="/settings" element={ses?<Settings/>:<App/>}>
             <Route path="" element={ses?<GeneralSetting/>:<App/>}/> 
@@ -52,7 +64,7 @@ function Routing() {
             <Route path="Privacy" element={<Privacy/>}/>
             <Route path="ProfileAndTagging" element={<ProfileAndTagging/>} />
             <Route path="publicpost" element={<Publicpost/>}/>
-            <Route path="blocking" element={<Blocking/>}/>
+            <Route path="blocking" element={<Blocking obj={socket}/>}/>
         </Route>
       </Routes>
     </Router>

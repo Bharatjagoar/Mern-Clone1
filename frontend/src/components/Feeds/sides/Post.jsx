@@ -5,7 +5,7 @@ import PostHeader from "./Postheader/Header";
 import PostBody from "./postbody/postBody";
 
 
-const Posts = () => {
+function Posts({socket})  {
   const [arr, setarr] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const Posts = () => {
       setarr(result.data);
     });
   }, []);
-  console.table(arr)
   return (
     <div className={PostCSS.outerMostDiv}>
       {
@@ -24,7 +23,7 @@ const Posts = () => {
           arr.map(post=>{
               return <div key={post._id} className={PostCSS.container}>
                 {console.log(post._id)}
-					<PostHeader name={post.userName} created={post.createdAt} Post={post._id} media={post.mediaId} user={post.userId}/>
+					<PostHeader name={post.userName} created={post.createdAt} Post={post._id} media={post.mediaId} user={post.userId} socketObject={socket}/>
 					<PostBody src={post.mediaUrl} caption={post.caption}/>
               </div>
           })

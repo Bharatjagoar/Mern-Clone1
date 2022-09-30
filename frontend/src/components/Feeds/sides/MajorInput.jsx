@@ -16,6 +16,7 @@ import { useSelector } from "react-redux"
 import DisplayPicture from "./DisplayPicture";
 import {Link} from "react-router-dom"
 import Axios from "axios";
+import { useEffect } from "react";
 
 
 
@@ -28,10 +29,10 @@ function MajorInput(props){
     const [caption,setcaption]=useState()
     const [previewdisplay,setpreviewdisplay]=useState(false);
     const [imagetag,setimagetag]=useState(true)
+    
     function captionsetting(e){
         setcaption(e.target.value)
     }
-    console.log(Sess    )
     function FilesInput(file){
         console.log(file,"this is thee file")
         setuploadPicture(file)

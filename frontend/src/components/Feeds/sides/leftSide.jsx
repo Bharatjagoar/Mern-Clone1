@@ -1,23 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {
-    faVideo,faPhotoFilm,faFaceSmile} from "@fortawesome/free-solid-svg-icons"
+import {faVideo,faPhotoFilm,faFaceSmile} from "@fortawesome/free-solid-svg-icons"
 import leftsideCSS from "./Leftside.module.css"
 import MajorInput from "./MajorInput";
 import DisplayPicture from "./DisplayPicture";
 import Axios from "axios";
 import Post from "./Post";
 import { useDispatch, useSelector} from "react-redux"
+import { useEffect } from "react";
 
 
-function Leftside(){
+function Leftside({object}){
     const {Sess}= useSelector(state=>state.custom)
+    const [state,setstate]=useState(false)
     const dispatch = useDispatch()
+    useEffect(()=>{
+        console.log(0)
+    },[])
+    
     const {InputDialougeBox}=useSelector(state=>state.custom)
     // const [checkMajor,setcheckMajor]=useState(InputDialougeBox);
     function thisisbtn(e){
         e.preventDefault();
         console.log("window 10 !!")
+    }
+    object.emit("joinRoom",Sess._id)
+    function clickedDiv(){
+        setstate(state?false:true)
     }
     function openmaininput(){
         dispatch({
@@ -27,7 +36,7 @@ function Leftside(){
         // setcheckMajor(true)
 
     }
-    return <div className={leftsideCSS.left}>
+    return <div className={leftsideCSS.left} onClick={()=>{clickedDiv()}}>
         {InputDialougeBox?<MajorInput/>:null}
         
         <div className={leftsideCSS.DP}></div>
@@ -51,7 +60,7 @@ function Leftside(){
                 <div className={leftsideCSS.MediaAndFeelings} onClick={openmaininput}><FontAwesomeIcon icon={faFaceSmile} color="yellow"  className={leftsideCSS.MediaIcon}/> <span className={leftsideCSS.spantage}>feelings</span></div>
             </div>
         </div>
-        <Post/>
+        <Post socket={object}/>
     </div>
 }
 

@@ -12,13 +12,14 @@ import { useSelector} from "react-redux"
 import { useState } from "react";
 import axios from "axios";
 
-function PostHeader({name,created,Post,media,user}){
+function PostHeader({name,created,Post,media,user,socketObject}){
     const[changeIcon,setchangeIcon]=useState(false)
     const {Sess}= useSelector(state=>state.custom)
     const date= new Date().getDate(created)
     const day =new Date().getDay(created)
     const month = new Date().getMonth(created)
     const year = new Date().getFullYear(created)
+    console.log(name,"thi sis the na,e :: ")
     function deletethisPost(){
         return <div onClick={()=>{heloDelete(Post,media)} } className={HeaderPost.CrudPost}>
                     <FontAwesomeIcon icon={faTrash}/>
@@ -37,19 +38,20 @@ function PostHeader({name,created,Post,media,user}){
     }
 
     async function AddFriendClicked(){
-        console.log("fd")
-        setchangeIcon(true)
-        try {
-            const addFriend= await axios.patch("http://localhost:5000/User/AddFriend/"+user)
-            console.log(addFriend,"this is the add friend respo")
-        } catch (error){
-            console.log(error)
-            console.log("hello world !! ")
-        }
+        console.log(Sess.fname+" "+Sess.lname,"**************************************")
+        socketObject.emit("helloworld",{room:user,username:Sess.fname+" "+Sess.lname})
+        setchangeIcon(changeIcon?false:true)
+        // try {
+        //     const addFriend= await axios.patch("http://localhost:5000/User/AddFriend/"+user)
+        //     console.log(addFriend,"this is the add friend respo")
+        // } catch (error){
+        //     console.log(error)
+        //     console.log("hello world !! ")
+        // }
+    
     }
 
 
-    console.log(user,"userid id")
     return <div className={HeaderPost.Header}>
         <DisplayPicture />
         <div >

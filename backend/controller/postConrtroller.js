@@ -61,3 +61,8 @@ module.exports.deleteThisCloudinary = async (req,res)=>{
         message:"working fine !!"
     })
 }
+
+module.exports.funny=(req,res)=>{
+  console.log("hello funny ")
+  res.send()
+}
