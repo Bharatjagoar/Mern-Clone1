@@ -47,6 +47,7 @@ module.exports.LoginUser=async (req,res)=>{
 }
 
 module.exports.SessionCheck = (req,res)=>{
+    // console.log(req.session.user,"thios ")
     if(req.session.user){
         res.send({message:true,user:req.session.user})
     }else{

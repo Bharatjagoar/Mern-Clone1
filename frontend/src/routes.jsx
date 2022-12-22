@@ -27,28 +27,31 @@ function Routing() {
       socket.on("hello",(socket)=>{
           console.log(socket,"this is the socket")
       })
+      
       const SesResponse =  axios.get("http://localhost:5000/User/loginSesion", {
         withCredentials: true,
       });
       SesResponse.then((Response) => {
-        setses(Response.data.message);
-        dispatch({
-          type:"Session",
-          payload:Response.data.user
+        console.log(Response.data.user)
+        setses(Response.data.user);
+        // socket.emit("connectionpossible",{userID:Response.data.user._id})
         })
-      });
-      SesResponse.catch((err)=>{
+        // console.log(Response.data.user._id)
+        
+        SesResponse.catch((err)=>{
         console.log(err);
       })
-  });
+      })
+      
+  // });
 
   socket.on("hell",(socket)=>{
     console.log(socket,"this is the socket")
   })
   socket.on("friendrequest",data=>{
     console.log("data freind request data :: ",data)
-    alert(data,"room joined")
   })
+  console.log(ses)
   return (
     <Router>
       <Routes>

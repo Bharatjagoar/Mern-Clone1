@@ -5,13 +5,20 @@ const PostRouter= require("./post")()
 const UserRouter=require("./user")()
 
 function socketRoutes(io){
-    io.on("connection",socket=>{
+    io.on("connection",async (socket)=>{
+        
+        socket.on("connectionpossible",(data)=>{  
+            console.log(socket.id)  
+            console.log("from useEffect",data)
+        })
+        
         socket.on("leftside",data=>{
             console.log("data ::::2::::",data)
         })
         socket.on("joinRoom",data=>{
             // console.log(data,"this room is joinerd ")
             socket.join(data)
+            console.log(data,"joined")
         })
         
 

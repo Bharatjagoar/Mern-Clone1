@@ -19,7 +19,6 @@ function PostHeader({name,created,Post,media,user,socketObject}){
     const day =new Date().getDay(created)
     const month = new Date().getMonth(created)
     const year = new Date().getFullYear(created)
-    console.log(name,"thi sis the na,e :: ")
     function deletethisPost(){
         return <div onClick={()=>{heloDelete(Post,media)} } className={HeaderPost.CrudPost}>
                     <FontAwesomeIcon icon={faTrash}/>
