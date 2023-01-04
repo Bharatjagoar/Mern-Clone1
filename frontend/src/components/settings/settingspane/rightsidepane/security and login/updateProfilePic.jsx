@@ -19,6 +19,7 @@ function CropperReact(){
     const [objectssxios,setobjectssxios]=useState(null);
 
     useEffect(()=>{
+        console.log(objectssxios)
         if(objectssxios){
             dispatch({
                 type:"Displaypicture",
@@ -66,6 +67,10 @@ function CropperReact(){
         })
         .then((res)=>{
             console.log(res.data)
+            dispatch({
+                type:"Session",
+                payload:res.data
+              })
         })
         .catch((err)=>{
             console.log(err)
@@ -73,6 +78,7 @@ function CropperReact(){
         })
         
         console.log(objectssxios.secure_url)
+        setobjectssxios(null)
         
     }
 
@@ -87,7 +93,7 @@ function CropperReact(){
             <button onClick={download}>download</button>
             <button onClick={(e)=>{hidetheComponent()}}> cancel</button>
         </div>
-        <img src="" id="myimage" alt="" />
+        <img src={objectssxios} id="myimage" alt="" />
     </div>
 }
 

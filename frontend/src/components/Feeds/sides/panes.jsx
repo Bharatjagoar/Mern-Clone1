@@ -9,7 +9,7 @@ import Rightside from "./rightside";
 
 function Panes({obj}){
     document.title="Facebook"
-    
+    obj.emit("loggedinUser",{message:"bharat jagoar"})
     return <div>
         <FeedsNavBar/>
         <div className={panesCSS.flex}>

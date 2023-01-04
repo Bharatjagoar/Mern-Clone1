@@ -8,26 +8,24 @@ function socketRoutes(io){
     io.on("connection",async (socket)=>{
         
         socket.on("connectionpossible",(data)=>{  
-            console.log(socket.id)  
+              
             console.log("from useEffect",data)
         })
-        
-        socket.on("leftside",data=>{
-            console.log("data ::::2::::",data)
+        socket.on("loggedinUser",data=>{
+            console.log(data,"\n","data")
         })
-        socket.on("joinRoom",data=>{
-            // console.log(data,"this room is joinerd ")
-            socket.join(data)
-            console.log(data,"joined")
+        socket.on("JoinTheseFriendRequestroom",data=>{
+            // console.log("rom list data",data.myid)
+            data.arr.forEach(element => {
+                console.log(element,"joinedsdsa")
+                socket.join(data.myid+"friendsRequest"+element)
+            });
         })
-        
-
         socket.on("helloworld",data=>{
-            
-            console.log(data,"this is bharat room")
-            socket.join(data.room)
-            socket.to(data.room).emit("friendrequest",data.username)
+            // console.log("hello world :: ",data)
+            socket.emit("windows")
         })
+        
     })
 
     console.log("hi")

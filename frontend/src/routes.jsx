@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import io from "socket.io-client"
-import { BrowserRouter as Router, Route, Routes ,useNavigate} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes ,Navigate} from "react-router-dom";
 import App from "./app";
 import Panes from "./components/Feeds/sides/panes";
 import Frineds from "./components/friends/FriendsPage";
@@ -20,28 +20,46 @@ const socket=io.connect("http://localhost:5000")
 
 
 function Routing() {
-  // const navr = useNavigate()
   const [ses, setses] = useState();
   const dispatch = useDispatch();
-  useEffect(() =>{
-      socket.on("hello",(socket)=>{
-          console.log(socket,"this is the socket")
-      })
+  useEffect( () =>{
+       
       
-      const SesResponse =  axios.get("http://localhost:5000/User/loginSesion", {
-        withCredentials: true,
-      });
-      SesResponse.then((Response) => {
-        console.log(Response.data.user)
-        setses(Response.data.user);
-        // socket.emit("connectionpossible",{userID:Response.data.user._id})
-        })
-        // console.log(Response.data.user._id)
-        
-        SesResponse.catch((err)=>{
-        console.log(err);
-      })
-      })
+      const sessionLoad = async ()=> {
+        try {
+            console.log("before state")
+            const SesResponse = await axios.get("http://localhost:5000/User/loginSesion", {
+            withCredentials: true,
+            });
+            console.log("after state")
+            setses(SesResponse.data.user);
+            console.log(SesResponse.data.user)
+            
+            dispatch({
+                type:"Session",
+                payload:SesResponse.data.user
+              })  
+            const Roomcheckresponse = await axios.get("http://localhost:5000/User/RoomFriendsRequest?myId="+SesResponse.data.user._id)
+            console.log("roomchecck res",Roomcheckresponse.data)
+            const frArrays = Roomcheckresponse.data
+            let FRroomsList = []
+            let numb=0
+            frArrays.forEach(element => {
+                console.log("num:",element.friendsUniqueId._id)
+                FRroomsList[numb]=element.friendsUniqueId._id
+                numb++
+            });
+            console.log(FRroomsList,"list")
+            socket.emit("JoinTheseFriendRequestroom",{arr:FRroomsList,myid:SesResponse.data.user._id})
+            
+        } catch (error) {
+          console.log(error,"fdsafdsa")
+        }
+        console.log("after1 try")
+      }
+      console.log("before ss load")
+      sessionLoad();
+},[])
       
   // });
 
@@ -51,14 +69,13 @@ function Routing() {
   socket.on("friendrequest",data=>{
     console.log("data freind request data :: ",data)
   })
-  console.log(ses)
   return (
     <Router>
       <Routes>
-        <Route path="/" element={ses ? <Panes /> : <App />} />
+        <Route path="/" element={ses ? <Navigate to={'/panes'} replace/> : <App />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<Error />} />
-        <Route path="/panes" element={ses ? <Panes obj={socket} /> : <App />} />
+        <Route path="/panes" element={ses ? <Panes obj={socket} /> : <Navigate to={'/'} replace/> } />
         <Route path="/friends" element={ses?<Frineds />:<App/>} />
         <Route path="/settings" element={ses?<Settings/>:<App/>}>
             <Route path="" element={ses?<GeneralSetting/>:<App/>}/> 

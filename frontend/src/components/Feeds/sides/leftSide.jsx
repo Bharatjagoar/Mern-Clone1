@@ -15,7 +15,6 @@ function Leftside({object}){
     const [state,setstate]=useState(false)
     const dispatch = useDispatch()
     useEffect(()=>{
-        console.log(0)
     },[])
     
     const {InputDialougeBox}=useSelector(state=>state.custom)
@@ -24,7 +23,6 @@ function Leftside({object}){
         e.preventDefault();
         console.log("window 10 !!")
     }
-    object.emit("joinRoom",Sess._id)
     function clickedDiv(){
         setstate(state?false:true)
     }

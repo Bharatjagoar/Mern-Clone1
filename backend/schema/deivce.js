@@ -10,7 +10,5 @@ const DevicesSchema = mongoose.Schema({
         {os:String,description:String}
     ]
 },{timeStamps:true})
-
-
 const Device=mongoose.model("Devices",DevicesSchema)
 module.exports=Device;

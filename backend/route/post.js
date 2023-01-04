@@ -1,6 +1,6 @@
 const express =require("express");
 const PostController = require("../controller/postConrtroller")
-function PostRoutes(){
+function PostRoutes(io){
 
     const Router = express.Router();
 

@@ -2,7 +2,6 @@ const express = require("express")
 const usercontroller = require("../controller/userController")  
 
 function UserRouter(){
-          
     const router = express.Router()
     router.post("/CreateUser",usercontroller.createuser)
     router.post("/login",usercontroller.LoginUser)
@@ -13,7 +12,12 @@ function UserRouter(){
     router.post("/DeviceNamestorage",usercontroller.userDeviceDetail);
     router.post("/updateProfilePicture",usercontroller.UpdateProfilePicture)
     router.post("/updatePassword",usercontroller.UpdatePassword)
-    router.patch("/AddFriend/:id",usercontroller.addFriend)
+    router.post("/AddFriend/:id",usercontroller.addFriend)
+    router.get("/Checkthefriend/:RecievedId/:sentId",usercontroller.CheckFriends)
+    router.patch("/UpdateFriends/:id",usercontroller.AppendFriends)
+    router.get("/PullBack",usercontroller.Pullback)
+    router.get("/RoomFriendsRequest",usercontroller.RoomCheck)
+    router.get("/polulatedata",usercontroller.populate)
 
     return router
 }

@@ -22,6 +22,7 @@ function Posts({socket})  {
 
           arr.map(post=>{
               return <div key={post._id} className={PostCSS.container}>
+                {/* {console.log(post.userId)} */}
 					<PostHeader name={post.userName} created={post.createdAt} Post={post._id} media={post.mediaId} user={post.userId} socketObject={socket}/>
 					<PostBody src={post.mediaUrl} caption={post.caption}/>
               </div>
