@@ -185,12 +185,15 @@ module.exports.UpdatePassword=async (req,res)=>{
 
 module.exports.CheckFriends= async (req,res)=>{
     console.log("request :: ",req.params)
-    
+    let sentFRS=[]
     try {
         const checkSentFRs =await FriendRequestSentDb.findOne({userId:req.params.sentId})
+        
         if(!checkSentFRs){
             const newlyCreatedSENTfrs= await FriendRequestSentDb.create({userId:req.params.sentId,SentFR:req.params.RecievedId})
-            console.log("newly created dbs :: ",newlyCreatedSENTfrs);
+            console.log("newly created dbs :: ",newlyCreatedSENTfrs.SentFR);
+            sentFRS=newlyCreatedSENTfrs.SentFR
+            console.log(sentFRS,"************************ created")
         }
         else{
             const foundsentFrs = await FriendRequestSentDb.findOneAndUpdate({userId:req.params.sentId},{$push:{
@@ -198,15 +201,19 @@ module.exports.CheckFriends= async (req,res)=>{
             }},
         {new:true}
         )
-            console.log("the found Sent request doc created ==",foundsentFrs)
+            console.log("the found Sent request doc created ==",foundsentFrs.SentFR.SentFR)
+            sentFRS=foundsentFrs.SentFR.SentFR
+            console.log(sentFRS,"************************ updated")
         }
+        console.log("list of frinds ::------>> ","\n",sentFRS)
+        console.log(req.params.id,"this is params id")
         const checkFrineds = await friendsdb.findOne({userid:req.params.id})
         console.log(checkFrineds,"++++++++++++++++++++++++++++++++++++")
         if(!checkFrineds){
-            return res.send({message:true})
+            return res.send({message:true,sentFrsTo:sentFRS})
         }
         else{
-            return res.send({message:false})
+            return res.send({message:false,sentFrsTo:sentFRS})
         }
     } catch (error) {
         console.log("err in check friends ::",error)
@@ -270,10 +277,10 @@ module.exports.Pullback = async (req,res)=>{
 }
 
 module.exports.RoomCheck = async (req,res)=>{
-    // console.log("+++++++++++++++++++",req.query.myId)
+    console.log("+++++++++++++++++++",req.query.myId)
     try {
         const isFriendRequestAvailable = await friendsdb.findOne({userid:req.query.myId}).populate(["userid","Friend.friendsUniqueId"])
-        // console.log(isFriendRequestAvailable.Friend,"this is fre")
+        
         // let propsarr= ['updatedAt','createdAt',"year",'gender',"password","date",'month']
         // propsarr.forEach(element => {
         //     console.log(element)
@@ -283,6 +290,9 @@ module.exports.RoomCheck = async (req,res)=>{
         if(isFriendRequestAvailable){            
             // console.log(isFriendRequestAvailable.userid,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
             // console.log(isFriendRequestAvailable.Friend,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            console.log(isFriendRequestAvailable.Friend,"this is fre")
+            console.log(isFriendRequestAvailable,"this is frieds")
+            
             res.send(isFriendRequestAvailable.Friend)
         }
         else{
@@ -314,5 +324,13 @@ module.exports.populate = async (req,res)=>{
     } catch (error) {
         console.log(error)
     }
+    res.send()
+}
+module.exports.testthis1= async(req,res)=>{
+    console.log("this is TEST 1")
+    res.redirect("/User/testthis2")
+}
+module.exports.testthis2= async(req,res)=>{
+    console.log("this is test 2")
     res.send()
 }

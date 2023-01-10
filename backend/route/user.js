@@ -18,6 +18,8 @@ function UserRouter(){
     router.get("/PullBack",usercontroller.Pullback)
     router.get("/RoomFriendsRequest",usercontroller.RoomCheck)
     router.get("/polulatedata",usercontroller.populate)
+    // router.get("/testthis2")
+    // router.get("testthis",usercontroller.testthis1)
 
     return router
 }

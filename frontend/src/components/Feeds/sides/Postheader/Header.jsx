@@ -46,9 +46,10 @@ function PostHeader({name,created,Post,media,user,socketObject}){
         try {
             console.log("++++++++++++++++++++",user)
             const checkFriends = await axios.get('http://localhost:5000/User/Checkthefriend/'+user+'/'+Sess._id)
-            console.log(checkFriends.data)            
+            console.log("---->>>>",checkFriends.data)            
             if(checkFriends.data.message){
                 console.log("mesage",typeof(checkFriends.data.message))
+                console.log("inside the if of check")
                 try {
                     const addFriends = await axios.post("http://localhost:5000/User/AddFriend/"+user,{
                         friendid:Sess._id
@@ -62,11 +63,12 @@ function PostHeader({name,created,Post,media,user,socketObject}){
             }
             else{
                 console.log("not")
+                console.log("inside the else of checkfriends ")
                 try {
                     const foundFriendsRq = await axios.patch("http://localhost:5000/User/UpdateFriends/"+user,{
                         friendid:Sess._id
                     })
-                    console.log(foundFriendsRq)
+                    console.log(foundFriendsRq,"789456123")
                 } catch (error) {
                     console.log("error","\n",error)
                 }
