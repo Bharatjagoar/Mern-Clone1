@@ -33,12 +33,16 @@ function Routing() {
             });
             console.log("after state")
             setses(SesResponse.data.user);
-            console.log(SesResponse.data.user)
+            // console.log(SesResponse.data.user)
             
             dispatch({
                 type:"Session",
                 payload:SesResponse.data.user
               })  
+            console.log("this is the session ::",SesResponse.data.user._id)
+            const CheckingApi = axios.get("http://localhost:5000/User/CheckingApi")
+
+
             const Roomcheckresponse = await axios.get("http://localhost:5000/User/RoomFriendsRequest?myId="+SesResponse.data.user._id)
             console.log("roomchecck res",Roomcheckresponse.data)
             const frArrays = Roomcheckresponse.data

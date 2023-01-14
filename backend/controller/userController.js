@@ -183,77 +183,6 @@ module.exports.UpdatePassword=async (req,res)=>{
     }
 }
 
-module.exports.CheckFriends= async (req,res)=>{
-    console.log("request :: ",req.params)
-    
-    try {
-        const checkSentFRs =await FriendRequestSentDb.findOne({userId:req.params.sentId})
-        if(!checkSentFRs){
-            const newlyCreatedSENTfrs= await FriendRequestSentDb.create({userId:req.params.sentId,SentFR:req.params.RecievedId})
-            console.log("newly created dbs :: ",newlyCreatedSENTfrs);
-        }
-        else{
-            const foundsentFrs = await FriendRequestSentDb.findOneAndUpdate({userId:req.params.sentId},{$push:{
-                SentFR:req.params.RecievedId
-            }},
-        {new:true}
-        )
-            console.log("the found Sent request doc created ==",foundsentFrs)
-        }
-        const checkFrineds = await friendsdb.findOne({userid:req.params.id})
-        console.log(checkFrineds,"++++++++++++++++++++++++++++++++++++")
-        if(!checkFrineds){
-            return res.send({message:true})
-        }
-        else{
-            return res.send({message:false})
-        }
-    } catch (error) {
-        console.log("err in check friends ::",error)
-        res.send()
-    }
-}
-
-module.exports.addFriend= async (req,res)=>{
-    console.log("req body",req.body)
-    console.log("req params ",req.params.id)
-    
-    try {
-        
-        const addedFriend = await friendsdb.create({userid:req.params.id})
-        // console.log("add frindefdsa",addedFriend)
-        const addingNewFR = await friendsdb.findByIdAndUpdate(addedFriend._id,{
-            $push:{
-                Friend:{
-                    friendsUniqueId:req.body.friendid
-                }
-            }
-        },{new:true})
-        console.log("adding",addingNewFR)
-        console.log()
-    } catch (error) {
-        console.log("this is the error !! ",error)
-    }
-
-    res.send()
-}
-module.exports.AppendFriends = async (req,res)=>{
-    console.log("params :: ",req.params.id)
-    
-    
-    try {
-        const updateListFR = await friendsdb.findOneAndUpdate({userid:req.params.id},{
-            $push:{
-                Friend:{
-                    friendsUniqueId:req.body.friendid
-                }
-            }},{new:true})
-        console.log(updateListFR)
-    } catch (error) {
-        console.log("error :"+error)
-    }
-    res.send()
-}
 //pull back is just for trying pulls ::: 
 module.exports.Pullback = async (req,res)=>{
     console.log("pullback !! ")
@@ -281,11 +210,12 @@ module.exports.RoomCheck = async (req,res)=>{
         // });
 
         if(isFriendRequestAvailable){            
-            // console.log(isFriendRequestAvailable.userid,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            console.log(isFriendRequestAvailable.userid,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
             // console.log(isFriendRequestAvailable.Friend,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
             res.send(isFriendRequestAvailable.Friend)
         }
         else{
+            console.log("no room found !!")
             res.send()
         }
         
@@ -315,4 +245,22 @@ module.exports.populate = async (req,res)=>{
         console.log(error)
     }
     res.send()
+}
+
+module.exports.checktheApi = async (req,res)=>{
+
+    console.log("hello world from checking appi")
+    const checkthefreinds = await friendsdb.find({userid:"63339646d87273cf0d149e35"},"Friend")
+    let frindsarr=[]
+    let num=0
+    console.log("this is the best intitute !! ",checkthefreinds)
+    checkthefreinds.forEach(Ele=>{
+        // console.log(Ele.Friend[0].friendsUniqueId,"this is err ")
+        frindsarr[num] = Ele.Friend
+        num++
+    })
+    
+    
+    // console.log(frindsarr,"this is arr ")
+    return res.send()
 }

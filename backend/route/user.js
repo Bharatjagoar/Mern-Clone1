@@ -12,12 +12,14 @@ function UserRouter(){
     router.post("/DeviceNamestorage",usercontroller.userDeviceDetail);
     router.post("/updateProfilePicture",usercontroller.UpdateProfilePicture)
     router.post("/updatePassword",usercontroller.UpdatePassword)
-    router.post("/AddFriend/:id",usercontroller.addFriend)
-    router.get("/Checkthefriend/:RecievedId/:sentId",usercontroller.CheckFriends)
-    router.patch("/UpdateFriends/:id",usercontroller.AppendFriends)
+    
     router.get("/PullBack",usercontroller.Pullback)
     router.get("/RoomFriendsRequest",usercontroller.RoomCheck)
     router.get("/polulatedata",usercontroller.populate)
+
+
+
+    router.get("/CheckingApi",usercontroller.checktheApi)
 
     return router
 }

@@ -38,43 +38,7 @@ function PostHeader({name,created,Post,media,user,socketObject}){
 
     async function AddFriendClicked(){
         console.log(Sess.fname+" "+Sess.lname,"**************************************")
-        socketObject.emit("helloworld",{room:user,username:Sess._id})
-        socketObject.on("windows",()=>{
-            console.log("windows 10 pro lets do it")
-        })
         
-        try {
-            console.log("++++++++++++++++++++",user)
-            const checkFriends = await axios.get('http://localhost:5000/User/Checkthefriend/'+user+'/'+Sess._id)
-            console.log(checkFriends.data)            
-            if(checkFriends.data.message){
-                console.log("mesage",typeof(checkFriends.data.message))
-                try {
-                    const addFriends = await axios.post("http://localhost:5000/User/AddFriend/"+user,{
-                        friendid:Sess._id
-                    })
-                    console.log("add freinds psot request :: ",addFriends);
-                    
-
-                } catch (error) {
-                    console.log("error at addfriends post request ",error);
-                }
-            }
-            else{
-                console.log("not")
-                try {
-                    const foundFriendsRq = await axios.patch("http://localhost:5000/User/UpdateFriends/"+user,{
-                        friendid:Sess._id
-                    })
-                    console.log(foundFriendsRq)
-                } catch (error) {
-                    console.log("error","\n",error)
-                }
-            }
-        } catch (error) {
-            console.log("error","\n",error)            
-        }
-
         setchangeIcon(changeIcon?false:true)    
     }
     
