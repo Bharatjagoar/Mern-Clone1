@@ -249,7 +249,6 @@ module.exports.populate = async (req,res)=>{
     }
     res.send()
 }
-<<<<<<< HEAD
 
 module.exports.checktheApi = async (req,res)=>{
 
@@ -267,13 +266,4 @@ module.exports.checktheApi = async (req,res)=>{
     
     // console.log(frindsarr,"this is arr ")
     return res.send()
-=======
-module.exports.testthis1= async(req,res)=>{
-    console.log("this is TEST 1")
-    res.redirect("/User/testthis2")
-}
-module.exports.testthis2= async(req,res)=>{
-    console.log("this is test 2")
-    res.send()
->>>>>>> refs/remotes/origin/master
 }
