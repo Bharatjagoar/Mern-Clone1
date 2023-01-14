@@ -199,10 +199,10 @@ module.exports.Pullback = async (req,res)=>{
 }
 
 module.exports.RoomCheck = async (req,res)=>{
-    // console.log("+++++++++++++++++++",req.query.myId)
+    console.log("+++++++++++++++++++",req.query.myId)
     try {
         const isFriendRequestAvailable = await friendsdb.findOne({userid:req.query.myId}).populate(["userid","Friend.friendsUniqueId"])
-        // console.log(isFriendRequestAvailable.Friend,"this is fre")
+        
         // let propsarr= ['updatedAt','createdAt',"year",'gender',"password","date",'month']
         // propsarr.forEach(element => {
         //     console.log(element)
@@ -212,6 +212,9 @@ module.exports.RoomCheck = async (req,res)=>{
         if(isFriendRequestAvailable){            
             console.log(isFriendRequestAvailable.userid,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
             // console.log(isFriendRequestAvailable.Friend,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            console.log(isFriendRequestAvailable.Friend,"this is fre")
+            console.log(isFriendRequestAvailable,"this is frieds")
+            
             res.send(isFriendRequestAvailable.Friend)
         }
         else{
@@ -246,6 +249,7 @@ module.exports.populate = async (req,res)=>{
     }
     res.send()
 }
+<<<<<<< HEAD
 
 module.exports.checktheApi = async (req,res)=>{
 
@@ -263,4 +267,13 @@ module.exports.checktheApi = async (req,res)=>{
     
     // console.log(frindsarr,"this is arr ")
     return res.send()
+=======
+module.exports.testthis1= async(req,res)=>{
+    console.log("this is TEST 1")
+    res.redirect("/User/testthis2")
+}
+module.exports.testthis2= async(req,res)=>{
+    console.log("this is test 2")
+    res.send()
+>>>>>>> refs/remotes/origin/master
 }

@@ -38,7 +38,6 @@ function PostHeader({name,created,Post,media,user,socketObject}){
 
     async function AddFriendClicked(){
         console.log(Sess.fname+" "+Sess.lname,"**************************************")
-        
         setchangeIcon(changeIcon?false:true)    
     }
     
