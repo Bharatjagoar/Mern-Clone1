@@ -38,6 +38,8 @@ function PostHeader({name,created,Post,media,user,socketObject}){
 
     async function AddFriendClicked(){
         console.log(Sess.fname+" "+Sess.lname,"**************************************")
+        const friends = await axios.get("http://localhost:5000/User/friendsUpdate/"+user)
+        console.log(friends.data)
         setchangeIcon(changeIcon?false:true)    
     }
     

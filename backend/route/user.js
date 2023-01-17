@@ -18,7 +18,7 @@ function UserRouter(){
     router.get("/polulatedata",usercontroller.populate)
     // router.get("/testthis2")
     // router.get("testthis",usercontroller.testthis1)
-
+    router.get("/friendsUpdate/:sentto",usercontroller.FriendsaddOrUpdate)
 
 
     router.get("/CheckingApi",usercontroller.checktheApi)

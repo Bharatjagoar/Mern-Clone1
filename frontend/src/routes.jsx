@@ -46,16 +46,19 @@ function Routing() {
             const Roomcheckresponse = await axios.get("http://localhost:5000/User/RoomFriendsRequest?myId="+SesResponse.data.user._id)
             console.log("roomchecck res",Roomcheckresponse.data)
             const frArrays = Roomcheckresponse.data
-            console.log(frArrays)
             let FRroomsList = []
             let numb=0
-            frArrays.forEach(element => {
-                console.log("num:",element.friendsUniqueId._id)
-                FRroomsList[numb]=element.friendsUniqueId._id
-                numb++
-            });
+              if(frArrays){
+                frArrays.forEach(element => {
+                  console.log("num:",element.friendsUniqueId._id)
+                  FRroomsList[numb]=element.friendsUniqueId._id
+                  numb++
+              });
+              console.log(FRroomsList,"list")
+            }
+            
             // const testBackendRedirect = await axios.get("http://localhost:5000/User/testthis")
-            console.log(FRroomsList,"list")
+            
             socket.emit("JoinTheseFriendRequestroom",{arr:FRroomsList,myid:SesResponse.data.user._id})
             
         } catch (error) {

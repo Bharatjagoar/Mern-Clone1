@@ -6,12 +6,7 @@ const FriendRequestSentRoomSchema = mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref:"userSChema"
     },
-    SentFR:[
-        {
-        type:mongoose.Types.ObjectId,
-        ref:"userSChema"
-    }
-]
+    SentFR:[{type:mongoose.Types.ObjectId,ref:"userSChema"}]
 })
 const FriendRequest = mongoose.model("SentFRschema",FriendRequestSentRoomSchema)
 module.exports = FriendRequest

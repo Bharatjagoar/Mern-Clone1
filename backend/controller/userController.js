@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 const UserDB = require("../schema/UserSchema")
 const devicedb=require("../schema/deivce")
-const friendsdb = require("../schema/friendRequest")
+const friendsrequestdb = require("../schema/friendRequest")
 const FriendRequestSentDb =require("../schema/FreindRequestSent")
 module.exports.createuser=async (req,res)=>{
     try{
@@ -187,7 +187,7 @@ module.exports.UpdatePassword=async (req,res)=>{
 module.exports.Pullback = async (req,res)=>{
     console.log("pullback !! ")
 
-    const freindsRes = await friendsdb.updateOne({userid:"63339646d87273cf0d149e35"},{
+    const freindsRes = await friendsrequestdb.updateOne({userid:"63339646d87273cf0d149e35"},{
         $pull:{
             Friend:{
                 friendsUniqueId:"639ed7929343257a005573d2"
@@ -201,7 +201,7 @@ module.exports.Pullback = async (req,res)=>{
 module.exports.RoomCheck = async (req,res)=>{
     console.log("+++++++++++++++++++",req.query.myId)
     try {
-        const isFriendRequestAvailable = await friendsdb.findOne({userid:req.query.myId}).populate(["userid","Friend.friendsUniqueId"])
+        const isFriendRequestAvailable = await friendsrequestdb.findOne({userid:req.query.myId}).populate(["userid","Friend.friendsUniqueId"])
         
         // let propsarr= ['updatedAt','createdAt',"year",'gender',"password","date",'month']
         // propsarr.forEach(element => {
@@ -233,8 +233,8 @@ module.exports.populate = async (req,res)=>{
     console.log("populate")
     
     try {
-        const FriendsPopulate = await friendsdb.findOne({userid:"63339646d87273cf0d149e35"}).populate( ["userid","Friend.friendsUniqueId"] )
-        // const FindThisdb =friendsdb.findOne({userid:"63339646d87273cf0d149e35"}).populate([{path:"Friend",populate:{
+        const FriendsPopulate = await friendsrequestdb.findOne({userid:"63339646d87273cf0d149e35"}).populate( ["userid","Friend.friendsUniqueId"] )
+        // const FindThisdb =friendsrequestdb.findOne({userid:"63339646d87273cf0d149e35"}).populate([{path:"Friend",populate:{
         //     path:"friendsUniqueId"
         // }}])
         FriendsPopulate.then((respo)=>{
@@ -253,7 +253,7 @@ module.exports.populate = async (req,res)=>{
 module.exports.checktheApi = async (req,res)=>{
 
     console.log("hello world from checking appi")
-    const checkthefreinds = await friendsdb.find({userid:"63339646d87273cf0d149e35"},"Friend")
+    const checkthefreinds = await friendsrequestdb.find({userid:"63339646d87273cf0d149e35"},"Friend")
     let frindsarr=[]
     let num=0
     console.log("this is the best intitute !! ",checkthefreinds)
@@ -267,3 +267,119 @@ module.exports.checktheApi = async (req,res)=>{
     // console.log(frindsarr,"this is arr ")
     return res.send()
 }
+
+module.exports.FriendsaddOrUpdate =async (req,res)=>{
+    let message={mes:false}
+    console.log(req.session.user._id)
+    console.log(req.params.sentto)
+
+    try {
+        const friendsRequests = await friendsrequestdb.find({userid:req.params.sentto})
+        // console.log("*****************","\n",friendsRequests)
+        if(!friendsRequests[0]) {
+            const createdDoc = await friendsrequestdb.create({userid:req.params.sentto})
+            
+            console.log(createdDoc,"this is created doc")
+            const findingandupdating = await friendsrequestdb.findByIdAndUpdate(createdDoc._id,
+                {$push:{
+                    Friend:{friendsUniqueId:req.session.user}
+                }},
+                {new:true}
+            )
+            console.log("this is the updated doc:: " , findingandupdating)
+
+        } else {
+
+            console.log(friendsRequests[0],"this isfdsa")
+            // const foundbyid = await friendsrequestdb.findByIdAndUpdate(friendsRequests[0].id,{$push:{
+            //     Friend:{friendsUniqueId:req.session.user}
+            // }},
+            // {new:true})
+            console.log()
+            // console.log(foundbyid,"this is the foundby id ")
+            const fing = await friendsrequestdb.findOne({userid:req.params.sentto})
+            fing.Friend
+            console.log(fing.Friend.length)
+            let index, flag=0;
+            for(index=0;index<fing.Friend.length;index++){
+                console.log(index)
+                // console.log(fing.Friend[index])
+                console.log(fing.Friend[index].friendsUniqueId.toString(),"this is the ud ")
+                console.log(req.session.user._id,"this is the sessionid")
+                if(fing.Friend[index].friendsUniqueId.toString()==req.session.user._id){
+                    console.log("breaking")
+                    flag=1;
+                    break;
+                    }
+                }
+            if(flag==0){
+                console.log("yse")
+                const addAndupdate = await friendsrequestdb.findOneAndUpdate({userid: req.params.sentto},{$push:{
+                    Friend:{friendsUniqueId:req.session.user}
+                }})
+                console.log(addAndupdate)
+                message.mes=true
+            }else{
+                console.log("no")
+                const pullingfrineds = await friendsrequestdb.updateOne({userid:req.params.sentto},
+                    {$pull:{
+                        Friend:{friendsUniqueId:req.session.user}
+                    }},
+                    {new:true}
+                )
+                console.log("friend found !! ")
+            }
+            // console.log("this is else block ",fing.Friend)
+        }   
+
+        const sent = await FriendRequestSentDb.find({userId:req.session.user._id})
+        if(!sent[0]){
+            const SentFR = await FriendRequestSentDb.create({userId:req.session.user._id})
+            console.log(SentFR)
+            console.log(SentFR.id)
+            // const updatingone = await 
+            const updating = await FriendRequestSentDb.findOneAndUpdate({userid:req.session.user._id},
+            {$push:{
+                SentFR:req.params.sentto
+            }})
+            console.log(updating,"this is the update ")
+        }
+        else{
+            let flag=0;
+            console.log(sent[0].SentFR.length,"********************")
+            sent[0].SentFR
+            for (let index = 0; index < sent[0].SentFR.length; index++) {
+                // console.log(sent[0].SentFR[index].toString())
+                console.log(req.session.user._id)
+                if(sent[0].SentFR[index]==req.params.sentto){
+                    console.log()
+                    flag=1
+                    break
+                }
+            }
+            console.log(flag,"/////////////////////////////////")
+            if(flag==0){
+                console.log("not found sent fr")
+                const updatearray = await FriendRequestSentDb.findOneAndUpdate({userid:req.session.user._id},{$push:{
+                    SentFR:req.params.sentto
+                }})
+            }else{
+                const foundanddelete = await FriendRequestSentDb.updateOne({userid:req.session.user._id},{$pull:{
+                    SentFR:req.params.sentto
+                }})
+                console.log("found sent fr !!")
+            }
+
+        }
+
+
+
+    } catch (error) {
+        console.log("this is the error from frineds",error)
+        return res.send()
+    }
+
+    res.send(message)
+    
+}
+
