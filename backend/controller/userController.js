@@ -286,11 +286,11 @@ module.exports.FriendsaddOrUpdate =async (req,res)=>{
                 }},
                 {new:true}
             )
-            console.log("this is the updated doc:: " , findingandupdating)
+            // console.log("this is the updated doc:: " , findingandupdating)
 
         } else {
 
-            console.log(friendsRequests[0],"this isfdsa")
+            // console.log(friendsRequests[0],"this isfdsa")
             // const foundbyid = await friendsrequestdb.findByIdAndUpdate(friendsRequests[0].id,{$push:{
             //     Friend:{friendsUniqueId:req.session.user}
             // }},
@@ -317,7 +317,7 @@ module.exports.FriendsaddOrUpdate =async (req,res)=>{
                 const addAndupdate = await friendsrequestdb.findOneAndUpdate({userid: req.params.sentto},{$push:{
                     Friend:{friendsUniqueId:req.session.user}
                 }})
-                console.log(addAndupdate)
+                console.log(addAndupdate,"this is addandupadte")
                 message.mes=true
             }else{
                 console.log("no")
@@ -333,12 +333,13 @@ module.exports.FriendsaddOrUpdate =async (req,res)=>{
         }   
 
         const sent = await FriendRequestSentDb.find({userId:req.session.user._id})
+        console.log(sent,"this is the sent")
         if(!sent[0]){
             const SentFR = await FriendRequestSentDb.create({userId:req.session.user._id})
-            console.log(SentFR)
+            console.log(SentFR,"this is the sentDRF")
             console.log(SentFR.id)
             // const updatingone = await 
-            const updating = await FriendRequestSentDb.findOneAndUpdate({userid:req.session.user._id},
+            const updating = await FriendRequestSentDb.findOneAndUpdate({userId:req.session.user._id},
             {$push:{
                 SentFR:req.params.sentto
             }})
@@ -359,15 +360,17 @@ module.exports.FriendsaddOrUpdate =async (req,res)=>{
             }
             console.log(flag,"/////////////////////////////////")
             if(flag==0){
-                console.log("not found sent fr")
-                const updatearray = await FriendRequestSentDb.findOneAndUpdate({userid:req.session.user._id},{$push:{
+                console.log("not found sent fr id iis :: ",req.session.user._id)
+                const updatearray = await FriendRequestSentDb.findOneAndUpdate({userId:req.session.user._id},{$push:{
                     SentFR:req.params.sentto
-                }})
+                }},{newI:true})
+                console.log(updatearray,"this the update arry !E#! ")
             }else{
-                const foundanddelete = await FriendRequestSentDb.updateOne({userid:req.session.user._id},{$pull:{
+                const foundanddelete = await FriendRequestSentDb.updateOne({userId:req.session.user._id},{$pull:{
                     SentFR:req.params.sentto
-                }})
-                console.log("found sent fr !!")
+                }},{new:true})
+                
+                console.log(foundanddelete,"found sent fr !!")
             }
 
         }
