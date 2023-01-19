@@ -386,3 +386,34 @@ module.exports.FriendsaddOrUpdate =async (req,res)=>{
     
 }
 
+module.exports.FriendRequestEnquery = async(req,res)=>{
+    // const date = new Date()
+    // date.getDate()
+    // console.log(date.getDay())
+    let recievedFRs,sentF
+    try {
+        
+        const FrSchcemas = await friendsrequestdb.findOne({userid:req.session.user._id})
+        .populate("Friend.friendsUniqueId","fname lname displayPicture")
+        // console.log("this is the result :: ", FrSchcemas.Friend)
+        recievedFRs = FrSchcemas.Friend
+        const SentfriendsRequest =await FriendRequestSentDb.findOne({userid:req.session.user._id})
+        .populate("SentFR","fname lname displayPicture")
+        console.log(SentfriendsRequest.SentFR,"fdgfsd5g15fds1g5dfs ")
+        sentF=SentfriendsRequest.SentFR
+        // console.log(SentfriendsRequest,"this is the sent FR9")
+    } catch (error) {
+        console.log(error,"from FrSchcemas")
+    }
+    console.log("hello world 390",req.session.user._id)
+    
+    console.log("recieved :",recievedFRs)
+    console.log("sent :: ",sentF)
+    
+
+    console.log("ok leggo ")
+    return res.send({
+        RevievedFriendsRQ:recievedFRs[0]?recievedFRs:null,
+        SentFriendsRQ:sentF[0]?sentF:null
+    })
+}

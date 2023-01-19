@@ -6,7 +6,8 @@ const initialstate={
     Months:null,
     Sess:null,
     Dp:null,
-    InputDialougeBox:null
+    InputDialougeBox:null,
+    friends:null
 }
 
 export const custom = createReducer(initialstate,{

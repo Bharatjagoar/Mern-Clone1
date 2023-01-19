@@ -19,7 +19,6 @@ function CropperReact(){
     const [objectssxios,setobjectssxios]=useState(null);
 
     useEffect(()=>{
-        console.log(objectssxios)
         if(objectssxios){
             dispatch({
                 type:"Displaypicture",

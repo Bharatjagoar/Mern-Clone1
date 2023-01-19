@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import io from "socket.io-client"
 import { BrowserRouter as Router, Route, Routes ,Navigate} from "react-router-dom";
+import Modal from "react-modal"
 import App from "./app";
 import Panes from "./components/Feeds/sides/panes";
 import Frineds from "./components/friends/FriendsPage";
@@ -19,6 +20,9 @@ import Blocking from "./components/settings/settingspane/rightsidepane/blocking"
 const socket=io.connect("http://localhost:5000")
 
 
+
+
+Modal.setAppElement('#root')
 function Routing() {
   const [ses, setses] = useState();
   const dispatch = useDispatch();
@@ -27,11 +31,10 @@ function Routing() {
       
       const sessionLoad = async ()=> {
         try {
-            console.log("before state")
+
             const SesResponse = await axios.get("http://localhost:5000/User/loginSesion", {
             withCredentials: true,
             });
-            console.log("after state")
             setses(SesResponse.data.user);
             // console.log(SesResponse.data.user)
             
@@ -40,33 +43,32 @@ function Routing() {
                 payload:SesResponse.data.user
               })  
             console.log("this is the session ::",SesResponse.data.user._id)
-            const CheckingApi = axios.get("http://localhost:5000/User/CheckingApi")
-
-
-            const Roomcheckresponse = await axios.get("http://localhost:5000/User/RoomFriendsRequest?myId="+SesResponse.data.user._id)
-            console.log("roomchecck res",Roomcheckresponse.data)
-            const frArrays = Roomcheckresponse.data
-            let FRroomsList = []
-            let numb=0
-              if(frArrays){
-                frArrays.forEach(element => {
-                  console.log("num:",element.friendsUniqueId._id)
-                  FRroomsList[numb]=element.friendsUniqueId._id
-                  numb++
-              });
-              console.log(FRroomsList,"list")
-            }
+            // const CheckingApi = axios.get("http://localhost:5000/User/CheckingApi")
             
-            // const testBackendRedirect = await axios.get("http://localhost:5000/User/testthis")
-            
-            socket.emit("JoinTheseFriendRequestroom",{arr:FRroomsList,myid:SesResponse.data.user._id})
+            const FrRooms = await axios.get("http://localhost:5000/User/FriendsRequestCheck")
+              console.log(FrRooms.data)
+              socket.emit("jointheseRevievedFriendsRQ",{array:FrRooms.data.RevievedFriendsRQ,
+                  sessionid:SesResponse.data.user._id}
+              )
+              socket.emit("jointheseSentFriendsRQ",{
+                array:FrRooms.data.SentFriendsRQ,
+                sessionid:SesResponse.data.user._id
+              })
+              
+            socket.on("joinedforrecieved",data=>{
+              console.log(data,"from Recieved FR rooms")
+            })
+            socket.on("joinedforsent",data=>{
+              console.log(data,"from sent FR rooms")
+            })
+              // console.log(SesResponse.data.user._id)
+
             
         } catch (error) {
           console.log(error,"fdsafdsa")
         }
         console.log("after1 try")
       }
-      console.log("before ss load")
       sessionLoad();
 },[])
       

@@ -13,6 +13,7 @@ function Posts({socket})  {
       withCredentials: true,
     });
     response.then((result) => {
+      console.log(result.data)
       setarr(result.data);
     });
   }, []);
