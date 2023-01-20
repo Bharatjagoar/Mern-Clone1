@@ -1,12 +1,19 @@
 import React from "react";
 import FeedsNavBar from "../Feeds/Navbar";
+import FreindsLeft from "./panes/FriendsLeft";
+import FriendsRight from "./panes/friendsRight";
+import FriendsPageCss from "./FriendsPage.module.css"
+
 
 
 function Frineds(){
-    return <>
+    return <div>
         <FeedsNavBar/>
-        <h1>this is friends !!</h1>
-    </>
+        <div className={FriendsPageCss.container}>
+            <div className={FriendsPageCss.FriendsLeft}><FreindsLeft/></div>
+            <div className={FriendsPageCss.FriendsRight}><FriendsRight/></div>
+        </div>
+    </div>
 }
 
 

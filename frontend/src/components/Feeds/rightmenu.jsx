@@ -21,10 +21,10 @@ import axios from "axios";
 function RightsideMenu(){
     const navigate = useNavigate()
     const DpRef=useRef(null);
-    const btnRef =useRef()
+    const btnRef =useRef(null)
     const [style,setStyle]=useState(true)
     function btnpressed(){
-        console.log(btnRef.current.className,"btn pressed")
+        // console.log(btnRef.current.className,"btn pressed")
         setStyle(false)
     }
     function updateProfile(){
@@ -41,15 +41,14 @@ function RightsideMenu(){
         })
     }
     useEffect(()=>{
+        // console.log(DpRef.current.className)
+        // console.log(btnRef.current.className)
         document.addEventListener("click",(e)=>{
             // console.log(DpRef.current.className,"this is ther")
             var windows=e.target.className
             // console.log(windows,"this is class required")
             if(!(windows==DpRef.current.className || windows==btnRef.current.className)){
-                
-                setTimeout(() => {
-                    setStyle(true)                    
-                }, 100);
+                setStyle(true)
             }
         })
     })

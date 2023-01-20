@@ -40,13 +40,18 @@ function FeedsNavBar(){
         }
         
     }
+    const image = ()=>{
+        usenave("/")
+    }
         let stylethis= {
             color:"#1B74E4",
             borderBottom: "5px #1B74E4 solid",
         }
     return <div className={feedsNavbarCSS.parentNavbar}>
         <div className={feedsNavbarCSS.logo}>
-            <img src="https://res.cloudinary.com/dyjngm7az/image/upload/v1663238102/xchjascf8xwse2pio7te.png" alt="fdsafdsa" />     
+            <img onClick={()=>{image()}} 
+            src="https://res.cloudinary.com/dyjngm7az/image/upload/v1663238102/xchjascf8xwse2pio7te.png" 
+            alt="fdsafdsa" />     
             <div className={feedsNavbarCSS.SearchBoxContainer}><FontAwesomeIcon icon={faMagnifyingGlass} className={feedsNavbarCSS.windows} size="2x"/></div>
         </div>
         <div className={feedsNavbarCSS.stylethisdiv}>
