@@ -7,7 +7,7 @@ const initialstate={
     Sess:null,
     Dp:null,
     InputDialougeBox:null,
-    friends:null
+    Freinds:null
 }
 
 export const custom = createReducer(initialstate,{
@@ -31,6 +31,10 @@ export const custom = createReducer(initialstate,{
     },
     Displaypicture:(state,action)=>{
         state.Dp=action.payload
+    },
+    friendRequest:(state,action)=>{
+        state.Freinds=action.payload
     }
+    
 })
 

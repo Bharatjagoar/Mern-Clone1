@@ -20,7 +20,7 @@ function UserRouter(){
     // router.get("testthis",usercontroller.testthis1)
     router.get("/friendsUpdate/:sentto",usercontroller.FriendsaddOrUpdate)
     router.get("/FriendsRequestCheck",usercontroller.FriendRequestEnquery)
-
+    router.get("/FriendsRequestPage",usercontroller.FriendsRequestPage)
 
     router.get("/CheckingApi",usercontroller.checktheApi)
 

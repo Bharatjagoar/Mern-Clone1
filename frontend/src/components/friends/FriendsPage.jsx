@@ -3,10 +3,14 @@ import FeedsNavBar from "../Feeds/Navbar";
 import FreindsLeft from "./panes/FriendsLeft";
 import FriendsRight from "./panes/friendsRight";
 import FriendsPageCss from "./FriendsPage.module.css"
+import axios from "axios";
 
 
 
 function Frineds(){
+    const Friends= async ()=>{
+        console.log("hello worlds")
+    }
     return <div>
         <FeedsNavBar/>
         <div className={FriendsPageCss.container}>

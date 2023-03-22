@@ -47,8 +47,8 @@ module.exports.LoginUser=async (req,res)=>{
     }
 }
 
-module.exports.SessionCheck = (req,res)=>{
-    // console.log(req.session.user,"thios ")
+module.exports.SessionCheck = async (req,res)=>{
+    // console.log(req.session.user,"thios
     if(req.session.user){
         res.send({message:true,user:req.session.user})
     }else{
@@ -271,7 +271,7 @@ module.exports.checktheApi = async (req,res)=>{
 module.exports.FriendsaddOrUpdate =async (req,res)=>{
     let message={mes:false}
     console.log(req.session.user._id)
-    console.log(req.params.sentto)
+    console.log(req.params.sentto,"fdsafdsafdsafads")
 
     try {
         const friendsRequests = await friendsrequestdb.find({userid:req.params.sentto})
@@ -358,13 +358,13 @@ module.exports.FriendsaddOrUpdate =async (req,res)=>{
                     break
                 }
             }
-            console.log(flag,"/////////////////////////////////")
+            // console.log(flag,"/////////////////////////////////")
             if(flag==0){
                 console.log("not found sent fr id iis :: ",req.session.user._id)
                 const updatearray = await FriendRequestSentDb.findOneAndUpdate({userId:req.session.user._id},{$push:{
                     SentFR:req.params.sentto
                 }},{newI:true})
-                console.log(updatearray,"this the update arry !E#! ")
+                // console.log(updatearray,"this the update arry !E#! ")
             }else{
                 const foundanddelete = await FriendRequestSentDb.updateOne({userId:req.session.user._id},{$pull:{
                     SentFR:req.params.sentto
@@ -392,28 +392,56 @@ module.exports.FriendRequestEnquery = async(req,res)=>{
     // console.log(date.getDay())
     let recievedFRs,sentF
     try {
+        if(req.session.user){
+
+            // console.log(req.session.user._id,"this it")
+            const FrSchcemas = await friendsrequestdb.findOne({userid:req.session.user._id})
+            .populate("Friend.friendsUniqueId","fname lname displayPicture")
+            
+            // console.log(FrSchcemas,"////")
+            if(FrSchcemas){
+                console.log("this is the result :: ", FrSchcemas.Friend)
+                recievedFRs = FrSchcemas.Friend
+            }
+
+            const SentfriendsRequest = await FriendRequestSentDb.findOne({userId:req.session.user._id})
+            .populate("SentFR","fname lname displayPicture")
+            // console.log(SentfriendsRequest,"fdgfsd5g15fds1g5dfs ")
+            if(SentfriendsRequest){
+                sentF=SentfriendsRequest.SentFR
+            }
+            
         
-        const FrSchcemas = await friendsrequestdb.findOne({userid:req.session.user._id})
-        .populate("Friend.friendsUniqueId","fname lname displayPicture")
-        // console.log("this is the result :: ", FrSchcemas.Friend)
-        recievedFRs = FrSchcemas.Friend
-        const SentfriendsRequest =await FriendRequestSentDb.findOne({userid:req.session.user._id})
-        .populate("SentFR","fname lname displayPicture")
-        console.log(SentfriendsRequest.SentFR,"fdgfsd5g15fds1g5dfs ")
-        sentF=SentfriendsRequest.SentFR
+        }
         // console.log(SentfriendsRequest,"this is the sent FR9")
+        return res.send({
+            RevievedFriendsRQ:recievedFRs?recievedFRs:null,
+            SentFriendsRQ:sentF?sentF:null
+        }) 
     } catch (error) {
         console.log(error,"from FrSchcemas")
+        res.send()
     }
-    console.log("hello world 390",req.session.user._id)
     
-    console.log("recieved :",recievedFRs)
-    console.log("sent :: ",sentF)
+    // console.log("recieved :--------------------------------",recievedFRs)
+    // console.log("sent :: ",sentF)
     
 
     console.log("ok leggo ")
-    return res.send({
-        RevievedFriendsRQ:recievedFRs[0]?recievedFRs:null,
-        SentFriendsRQ:sentF[0]?sentF:null
-    })
+    
+}
+module.exports.FriendsRequestPage = async (req,res)=>{
+    console.log("page",req.session.user._id)
+    try {
+        const requestsRecieved = await friendsrequestdb.findOne({userid:req.session.user._id})
+        .populate("Friend.friendsUniqueId","fname lname displayPicture gender")
+        console.log(requestsRecieved.Friend)
+        console.log()
+        res.send(requestsRecieved.Friend)
+    } catch (error) {
+        console.log(error)
+        res.send()
+    }
+
+    // return res.send()
 }

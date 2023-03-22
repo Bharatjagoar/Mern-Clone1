@@ -1,34 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import io from "socket.io-client"
+import { useDispatch , useSelector} from "react-redux";
+import socket from "./socket";
 import { BrowserRouter as Router, Route, Routes ,Navigate} from "react-router-dom";
 import Modal from "react-modal"
-import App from "./app";
-import Panes from "./components/Feeds/sides/panes";
-import Frineds from "./components/friends/FriendsPage";
-import Settings from "./components/settings/Settings";
-import Signup from "./components/signup.jsx/signup";
-import Error from "./error";
-import GeneralSetting from "./components/settings/settingspane/rightsidepane/generalSetting";
-import SecurityAndLogin from "./components/settings/settingspane/rightsidepane/securityAndLogin";
-import LoginInfo from "./components/settings/settingspane/rightsidepane/loginInfo";
-import Privacy from "./components/settings/settingspane/rightsidepane/privacy";
-import ProfileAndTagging from "./components/settings/settingspane/rightsidepane/profileandtagging";
-import Publicpost from "./components/settings/settingspane/rightsidepane/publicpost";
-import Blocking from "./components/settings/settingspane/rightsidepane/blocking";
-const socket=io.connect("http://localhost:5000")
-
-
+import Routerextension from "./routesExtension"
 
 
 Modal.setAppElement('#root')
 function Routing() {
+const {friendRequest} = useSelector(state=>state.custom)
   const [ses, setses] = useState();
+  const [RecievedFriendsRQ,setRecievedFriendsRQ]=useState(null)
   const dispatch = useDispatch();
   useEffect( () =>{
-       
-      
       const sessionLoad = async ()=> {
         try {
 
@@ -41,26 +26,50 @@ function Routing() {
             dispatch({
                 type:"Session",
                 payload:SesResponse.data.user
-              })  
-            console.log("this is the session ::",SesResponse.data.user._id)
-            // const CheckingApi = axios.get("http://localhost:5000/User/CheckingApi")
-            
-            const FrRooms = await axios.get("http://localhost:5000/User/FriendsRequestCheck")
-              console.log(FrRooms.data)
-              socket.emit("jointheseRevievedFriendsRQ",{array:FrRooms.data.RevievedFriendsRQ,
-                  sessionid:SesResponse.data.user._id}
-              )
-              socket.emit("jointheseSentFriendsRQ",{
-                array:FrRooms.data.SentFriendsRQ,
-                sessionid:SesResponse.data.user._id
               })
+              if(SesResponse.data.user){
+                  console.log("this is the session ::",SesResponse.data.user._id)
+                  
+                  let socketUserId=SesResponse.data.user._id
+                  socket.auth = { socketUserId }
+                  socket.connect()
+                  
+                  socket.emit("joinSelf",{id:SesResponse.data.user._id})
+              }
               
+            // const CheckingApi = axios.get("http://localhost:5000/User/CheckingApi")
+
+            const FrRooms = await axios.get("http://localhost:5000/User/FriendsRequestCheck")
+              if(FrRooms.data.RevievedFriendsRQ){
+                socket.emit("jointheseRevievedFriendsRQ",{array:FrRooms.data.RevievedFriendsRQ,
+                  sessionid:SesResponse.data.user._id})
+              }
+              if(FrRooms.data.SentFriendsRQ){
+                socket.emit("jointheseSentFriendsRQ",{
+                  array:FrRooms.data.SentFriendsRQ,
+                  sessionid:SesResponse.data.user._id
+                })
+              }
+            socket.on("connect_error",(err)=>{
+              if(err.message){
+                console.log(err.message)
+              }
+            })
             socket.on("joinedforrecieved",data=>{
-              console.log(data,"from Recieved FR rooms")
+            //   console.log(data,"from Recieved FR rooms")
             })
             socket.on("joinedforsent",data=>{
-              console.log(data,"from sent FR rooms")
+            //   console.log(data,"from sent FR rooms")
             })
+            // socket.on("online",()=>{
+            //     setRecievedFriendsRQ(true)
+            //     dispatch({
+            //         type:"friendRequest",
+            //         payload:friendRequest?false:true
+            //     })
+            //     console.log(friendRequest)
+            //     //   alert("hello wrld")
+            // })
               // console.log(SesResponse.data.user._id)
 
             
@@ -83,19 +92,22 @@ function Routing() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={ses ? <Navigate to={'/panes'} replace/> : <App />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="*" element={<Error />} />
-        <Route path="/panes" element={ses ? <Panes obj={socket} /> : <Navigate to={'/'} replace/> } />
-        <Route path="/friends" element={ses?<Frineds />:<App/>} />
-        <Route path="/settings" element={ses?<Settings/>:<App/>}>
-            <Route path="" element={ses?<GeneralSetting/>:<App/>}/> 
-            <Route path="securityLogin" element={ses?<SecurityAndLogin/>:<App/>}/>
-            <Route path="LoginInfo" element={<LoginInfo/>}/>
-            <Route path="Privacy" element={<Privacy/>}/>
-            <Route path="ProfileAndTagging" element={<ProfileAndTagging/>} />
-            <Route path="publicpost" element={<Publicpost/>}/>
-            <Route path="blocking" element={<Blocking obj={socket}/>}/>
+        <Route path="/" element={ses ? <Navigate to={'/panes'} replace/> : <Routerextension.App />} />
+        <Route path="/signup" element={<Routerextension.Signup />} />
+        <Route path="*" element={< Routerextension.Error />} />
+        <Route path="/panes" element={ses ? <Routerextension.Panes obj={socket} /> : <Navigate to={'/'} replace/> } />
+        <Route path="/friends" element={ses?<Routerextension.Frineds />:<Routerextension.App/>} >
+
+            <Route path="Friendsrequests" element={ <Routerextension.Friendrequest /> }/>
+        </Route>
+        <Route path="/settings" element={ses?< Routerextension.Settings/>:<Routerextension.App/>}>
+            <Route path="" element={ses?< Routerextension.GeneralSetting/>:<Routerextension.App/>}/> 
+            <Route path="securityLogin" element={ses?<Routerextension.SecurityAndLogin/>:<Routerextension.App/>}/>
+            <Route path="LoginInfo" element={<Routerextension.LoginInfo LoginInfo/>}/>
+            <Route path="Privacy" element={<Routerextension.Privacy />}/>
+            <Route path="ProfileAndTagging" element={<Routerextension.ProfileAndTagging/>} />
+            <Route path="publicpost" element={<Routerextension.Publicpost />}/>
+            <Route path="blocking" element={<Routerextension.Blocking obj={socket}/>}/>
         </Route>
       </Routes>
     </Router>

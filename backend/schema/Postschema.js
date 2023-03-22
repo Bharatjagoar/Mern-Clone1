@@ -8,7 +8,8 @@ const PostSchema = Mongoose.Schema({
         type:"String"
     },
     userId:{
-        type:"String"
+        type:Mongoose.Types.ObjectId,
+        ref:"userSChema"
     },
     userName:{
         type:"String"

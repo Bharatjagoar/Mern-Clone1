@@ -18,6 +18,7 @@ import axios from "axios";
 
 
 
+
 function RightsideMenu(){
     const navigate = useNavigate()
     const DpRef=useRef(null);
@@ -32,6 +33,7 @@ function RightsideMenu(){
         navigate("/Settings")
     }
     function destroy(){
+        
         const logout = axios.post("http://localhost:5000/User/logout",{withCredentials:true})
         logout.then(()=>{
             document.location.reload()

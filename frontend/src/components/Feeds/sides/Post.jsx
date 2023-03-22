@@ -9,14 +9,35 @@ function Posts({socket})  {
   const [arr, setarr] = useState([]);
 
   useEffect(() => {
-    const response = Axios.get("http://localhost:5000/Post/GetPost", {
-      withCredentials: true,
-    });
-    response.then((result) => {
-      console.log(result.data)
-      setarr(result.data);
-    });
+
+    const getThePost = async ()=>{
+      try {
+        const response =await Axios.get("http://localhost:5000/Post/GetPost", {
+          withCredentials: true,
+        });    
+        console.log(response.data)
+        if(response.data){
+          setarr(response.data)
+        }
+      } catch (error) {
+        console.log(error)      
+      }
+
+    }
+    getThePost()
   }, []);
+
+  function deleteThis(id){
+    console.log("lde")
+    const newList = arr.filter((item)=>{
+      return item._id==id?null:item
+    })
+    console.log(newList,"///*/*/*/*/*/*/*")
+    setarr(newList)
+  }
+
+
+
   return (
     <div className={PostCSS.outerMostDiv}>
       {
@@ -24,7 +45,7 @@ function Posts({socket})  {
           arr.map(post=>{
               return <div key={post._id} className={PostCSS.container}>
                 {/* {console.log(post.userId)} */}
-					<PostHeader name={post.userName} created={post.createdAt} Post={post._id} media={post.mediaId} user={post.userId} socketObject={socket}/>
+					<PostHeader name={post.userName} created={post.createdAt} Post={post._id} media={post.mediaId} user={post.userId} socketObject={socket} deleted={deleteThis} display={post.userId}/>
 					<PostBody src={post.mediaUrl} caption={post.caption}/>
               </div>
           })

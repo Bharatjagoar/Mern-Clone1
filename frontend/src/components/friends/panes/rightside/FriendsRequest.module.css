@@ -1,0 +1,38 @@
+.OuterMostFriendRuquestContainer{
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
+}
+.Mapcontainer{
+    /* position: relative; */
+    width: 100%;
+    height: auto;
+    background-color: green;
+    padding-top: 10px;
+}
+.innercontainer{
+    /* position: absolute; */
+    background-color: red;
+    margin: 10px 5px;
+    height: 60px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.image{
+    position: relative;
+    height:50px;
+    background-color: aliceblue;
+    margin-right: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    /* width: 300px; */
+}
+.photo{
+    height: 100%;
+    display: block;
+}
+.nameandDP p{
+    display: inline-block;
+}

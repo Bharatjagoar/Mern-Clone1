@@ -25,7 +25,17 @@ const io= new Server(server,{
         methods:["GET","POST"]
     }
 })
-
+io.use((socket,next)=>{
+    const userId = socket.handshake.auth.socketUserId
+    // console.log(socket.id,"this is the id ")
+    // console.log(userId,"tbis us uesrid")
+    if(!userId){
+        return next(new Error("invalid user naem"))
+    }
+    socket.userId=userId
+    next()
+})
+io.in().fetchSockets()
 const socketRouter = require("./route/home")(io)
 
 app.use(express.json())
@@ -46,7 +56,7 @@ app.use(session({
   }))
   
 
-
+console.log("hello world")
 
 app.use("/",socketRouter);
 server.listen("5000",'0.0.0.0',()=>{

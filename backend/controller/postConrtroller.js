@@ -20,7 +20,7 @@ module.exports.createPost = async (req, res) => {
 module.exports.GetPost= async(req,res)=>{
 
     try {
-      const ress = await db.find({})
+      const ress = await db.find({}).populate("userId","fname lname displayPicture")
       res.send(ress)    
     } catch (error) {
         console.log(error,"fdsfdafdafdafdf")

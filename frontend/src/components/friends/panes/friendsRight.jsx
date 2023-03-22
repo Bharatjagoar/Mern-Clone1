@@ -1,11 +1,9 @@
 import React from "react";
-
+import { Outlet } from "react-router-dom";
 
 
 function FriendsRight() {
-    
-
-    return <h1>Frineds right here !! </h1>
+    return <Outlet/>
 }
 
 
