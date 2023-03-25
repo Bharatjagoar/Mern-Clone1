@@ -57,6 +57,7 @@ function socketRoutes(io){
             socket.join(data.id)
         })
         socket.on("addFriends",async (data)=>{
+            console.log(data,"!!!!!!!!!!!!")
             // console.log(0,"\t",data.check)
             // try {
             //     let roomsockets = await io.in(data.check).fetchSockets()
@@ -80,8 +81,10 @@ function socketRoutes(io){
                 console.log(" online for ou")
                 // console.log("data :: ",data.check)
                 // console.log("hello wrold ", socketids[index].id)
-                // console.log(0,socketids[index].userId)
-                if(data.check==socketids[index].userId){
+                console.log(45,"this is socketids[index]",socketids[index].userId)
+                console.log(data.check,"!!!!! 45")
+                // socketids[index].userId
+                if(data.check._id==socketids[index].userId){
                     console.log("yes found")
                     console.log(index)
                     io.to(socketids[index].id).emit("onlineFriends")
