@@ -21,6 +21,7 @@ function PostHeader({name,created,Post,media,user,deleted,display}){
     const month = new Date().getMonth(created)
     const year = new Date().getFullYear(created)
     
+    console.log(display,"----------------------------------")
     // console.log(display)
 
     const time = new Date(Date.now()).getFullYear()
@@ -59,6 +60,9 @@ function PostHeader({name,created,Post,media,user,deleted,display}){
         console.log(user)
         socket.emit("addFriends",{check:user})
     }
+
+
+
     // console.log(Sess._id,"\n",user._id)
     // Sess._id
     return <div className={HeaderPost.Header}>

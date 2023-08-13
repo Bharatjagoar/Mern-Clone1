@@ -8,6 +8,7 @@
     margin-top: 5px;
     width: 40px;
     height: 70%;
+    position: relative;
     background-color: #E4E6EB;
 }
 .outerside:hover{
@@ -64,3 +65,11 @@
 
 }
 
+.totalFriendsRequest{
+    background-color: red;
+    color: white;
+    position: absolute;
+    right: 0;
+    height: 50%;
+    width: 50%;
+}

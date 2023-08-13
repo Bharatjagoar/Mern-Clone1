@@ -25,24 +25,24 @@ function Posts({socket})  {
 
     }
     getThePost()
-  }, []);
+  },[]);
 
   function deleteThis(id){
     console.log("lde")
     const newList = arr.filter((item)=>{
-      return item._id==id?null:item
+      return item._id!=id&&item
     })
-    console.log(newList,"///*/*/*/*/*/*/*")
+    // console.log(newList,"///*/*/*/*/*/*/*")
     setarr(newList)
   }
-
-
+  console.log("arr/////////////////",arr)
 
   return (
     <div className={PostCSS.outerMostDiv}>
       {
 
           arr.map(post=>{
+              // console.log(post.userId)
               return <div key={post._id} className={PostCSS.container}>
                 {/* {console.log(post.userId)} */}
 					<PostHeader name={post.userName} created={post.createdAt} Post={post._id} media={post.mediaId} user={post.userId} socketObject={socket} deleted={deleteThis} display={post.userId}/>

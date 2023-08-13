@@ -20,9 +20,8 @@ function Form() {
     Navigate("/signup");
   }
   function LoginButton(e) {
-    
     e.preventDefault();
-    axios.post("http://localhost:5000/User/login", {
+    axios.post("http://localhost:5000/User/login" , {
         username: email,
         password: password,
       }).then((result) => {

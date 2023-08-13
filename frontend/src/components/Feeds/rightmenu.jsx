@@ -14,12 +14,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { useState ,useRef} from "react";
 import { useEffect } from "react";
+import socket from "../../socket";
 import axios from "axios";
 
 
 
 
 function RightsideMenu(){
+    const [requestnumber,setrequestnumber]=useState()
     const navigate = useNavigate()
     const DpRef=useRef(null);
     const btnRef =useRef(null)
@@ -45,20 +47,38 @@ function RightsideMenu(){
     useEffect(()=>{
         // console.log(DpRef.current.className)
         // console.log(btnRef.current.className)
-        document.addEventListener("click",(e)=>{
-            // console.log(DpRef.current.className,"this is ther")
-            var windows=e.target.className
-            // console.log(windows,"this is class required")
-            if(!(windows==DpRef.current.className || windows==btnRef.current.className)){
-                setStyle(true)
-            }
-        })
+        
+        console.log(requestnumber,Date.now().toLocaleString(),"fdsafdsadfsaf")
+    },[style])
+    document.addEventListener("click",(e)=>{
+        // console.log(DpRef.current.className,"this is ther")
+        var windows=e.target.className
+        // console.log(windows,"this is class required")
+        if(!(windows==DpRef.current.className || windows==btnRef.current.className)){
+            setStyle(true)
+        }
     })
-    
+    function timeOut(){
+        setTimeout(() => {
+            setrequestnumber(false)
+            console.log(Date.now().toLocaleString())
+        }, 5000);
+    }
+
+
+    socket.on("onlineFriends",()=>{
+        setrequestnumber(true)
+        console.log(Date.now().toLocaleString())
+        timeOut()
+    })
+
+
     return <div className={RightsideCSS.right}>
         <div className={RightsideCSS.outerside}><FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faAdd} /></div>
         <div className={RightsideCSS.outerside}><FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faFacebookMessenger}/></div>
-        <div className={RightsideCSS.outerside}><FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faBell}/></div>
+        <div className={RightsideCSS.outerside}>
+            {requestnumber?<div className={RightsideCSS.totalFriendsRequest}>fdsa</div>:null}
+            <FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faBell}/></div>
         <div className={RightsideCSS.outerside} id="#windows"> <button className={RightsideCSS.ProfileBtn} ref={DpRef}  onClick={()=>{btnpressed()}}><DisplayPicture name={btnRef}/></button>
             <div className={RightsideCSS.ProfileSetting} style={style?{display:"none"}:{display:"block"}}>
                 <div className={RightsideCSS.ProfileMenu}><button onClick={()=>{destroy()}}><FontAwesomeIcon icon={faRightFromBracket} /> logout</button></div>

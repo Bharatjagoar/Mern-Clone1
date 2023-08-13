@@ -21,12 +21,15 @@ module.exports.GetPost= async(req,res)=>{
 
     try {
       const ress = await db.find({}).populate("userId","fname lname displayPicture")
+      // console.log(ress)
+      ress.forEach(element => {
+          console.log(element.userId,"\n\n\n\n\n\n ")
+      });
       res.send(ress)    
     } catch (error) {
         console.log(error,"fdsfdafdafdafdf")
+        res.send()
     }
-
-  
 }
 
 module.exports.Delete = async (req,res)=>{

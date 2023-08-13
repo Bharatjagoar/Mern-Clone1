@@ -7,7 +7,6 @@ function DisplayPicture({name,pic}){
         // console.log(props)
         // console.log(Sess)
     let srces
-    console.log(pic,"this is pic")
     if(pic){
          srces =pic    
     }

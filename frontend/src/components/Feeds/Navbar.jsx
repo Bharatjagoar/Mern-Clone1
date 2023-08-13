@@ -66,12 +66,15 @@ function FeedsNavBar(){
         let iconStyle={
             color: "white"
         }
-    socket.on("onlineFriends",()=>{
-        alert("hello world ")
-        console.log("helfdasaaaaaaaaaaaaaaaaaaaaaaa")
-        // console.log(friendsRequest)
-        // setfriendsRequest(friendsRequest? false:true)
-    })
+    // socket.on("onlineFriends",()=>{
+    //     alert("hello world ")
+    //     console.log("helfdasaaaaaaaaaaaaaaaaaaaaaaa")
+    //     // console.log(friendsRequest)
+    //     // setfriendsRequest(friendsRequest? false:true)
+    // })
+
+
+
 
     return <div className={feedsNavbarCSS.parentNavbar}>
         <div className={feedsNavbarCSS.logo}>

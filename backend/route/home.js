@@ -76,7 +76,7 @@ function socketRoutes(io){
             // socketids.forEach(element => {
             //     console.log(element.userId,"----------------------------------")
             // });
-            console.log(socketids.length)
+            console.log(socketids[0].id,"fdfdsafdsafdsafd=============================  f")
             for (let index = 0; index < socketids.length; index++) {
                 console.log(" online for ou")
                 // console.log("data :: ",data.check)
@@ -94,6 +94,7 @@ function socketRoutes(io){
             }
         })
     })
+    
 
     console.log("hi")
     const Router = express.Router()
@@ -101,6 +102,10 @@ function socketRoutes(io){
     Router.use("/Post",PostRouter)
     Router.get("/home",HomeController.home)
     Router.get("/delete",HomeController.delete)
+    Router.get("/",(req,res)=>{
+        console.log("this is the port")
+        res.send("hello")
+    })
     return Router
 }
 
