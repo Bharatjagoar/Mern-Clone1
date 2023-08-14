@@ -21,7 +21,7 @@ function UserRouter(){
     router.get("/friendsUpdate/:sentto",usercontroller.FriendsaddOrUpdate)
     router.get("/FriendsRequestCheck",usercontroller.FriendRequestEnquery)
     router.get("/FriendsRequestPage",usercontroller.FriendsRequestPage)
-
+    router.get("/friendsrequestnumber",usercontroller.FreindsRequestnumber)
     router.get("/CheckingApi",usercontroller.checktheApi)
 
     return router

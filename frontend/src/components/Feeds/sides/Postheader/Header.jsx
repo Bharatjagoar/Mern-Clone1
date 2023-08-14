@@ -21,7 +21,7 @@ function PostHeader({name,created,Post,media,user,deleted,display}){
     const month = new Date().getMonth(created)
     const year = new Date().getFullYear(created)
     
-    console.log(display,"----------------------------------")
+    // console.log(display,"----------------------------------")
     // console.log(display)
 
     const time = new Date(Date.now()).getFullYear()
@@ -50,15 +50,17 @@ function PostHeader({name,created,Post,media,user,deleted,display}){
     }
 
     async function AddFriendClicked(){
-        console.log(Sess.fname+" "+Sess.lname,"**************************************")
-        console.log(user._id,"hari bol")
+        // console.log(Sess.fname+" "+Sess.lname,"**************************************")
+        // console.log(user._id,"hari bol")
         const friends = await axios.get("http://localhost:5000/User/friendsUpdate/"+user._id)
+        console.log(friends.data.mes,"-------------------------")
         // console.log(friends.data)
         setchangeIcon(changeIcon?false:true)
-        
         console.log(Sess._id)
         console.log(user)
-        socket.emit("addFriends",{check:user})
+        if(friends.data.mes){
+            socket.emit("addFriends",{check:user})
+        }
     }
 
 
@@ -72,7 +74,7 @@ function PostHeader({name,created,Post,media,user,deleted,display}){
         </div>
         
             {Sess._id===user._id?deletethisPost():
-            <FontAwesomeIcon icon={changeIcon?faCircleCheck:faUserPlus} 
+            <FontAwesomeIcon icon={changeIcon?faUserPlus:faCircleCheck} 
             onClick={()=>{AddFriendClicked()}} 
             className={HeaderPost.IconAddfriend}
             />} 

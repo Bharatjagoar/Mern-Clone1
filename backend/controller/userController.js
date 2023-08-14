@@ -271,7 +271,7 @@ module.exports.checktheApi = async (req,res)=>{
 module.exports.FriendsaddOrUpdate =async (req,res)=>{
     let message={mes:false}
     console.log(req.session.user._id)
-    console.log(req.params.sentto,"fdsafdsafdsafads")
+    console.log(req.params.sentto,"fdsafdsafdsafads5555555555555555555555555555")
 
     try {
         const friendsRequests = await friendsrequestdb.find({userid:req.params.sentto})
@@ -295,32 +295,32 @@ module.exports.FriendsaddOrUpdate =async (req,res)=>{
             //     Friend:{friendsUniqueId:req.session.user}
             // }},
             // {new:true})
-            console.log()
+            // console.log()
             // console.log(foundbyid,"this is the foundby id ")
             const fing = await friendsrequestdb.findOne({userid:req.params.sentto})
             fing.Friend
-            console.log(fing.Friend.length)
+            // console.log(fing.Friend.length)
             let index, flag=0;
             for(index=0;index<fing.Friend.length;index++){
-                console.log(index)
+                // console.log(index)
                 // console.log(fing.Friend[index])
-                console.log(fing.Friend[index].friendsUniqueId.toString(),"this is the ud ")
-                console.log(req.session.user._id,"this is the sessionid")
+                // console.log(fing.Friend[index].friendsUniqueId.toString(),"this is the ud ")
+                // console.log(req.session.user._id,"this is the sessionid")
                 if(fing.Friend[index].friendsUniqueId.toString()==req.session.user._id){
-                    console.log("breaking")
+                    // console.log("breaking")
                     flag=1;
                     break;
                     }
                 }
             if(flag==0){
-                console.log("yse")
+                // console.log("yse")
                 const addAndupdate = await friendsrequestdb.findOneAndUpdate({userid: req.params.sentto},{$push:{
                     Friend:{friendsUniqueId:req.session.user}
                 }})
-                console.log(addAndupdate,"this is addandupadte")
+                // console.log(addAndupdate,"this is addandupadte")
                 message.mes=true
             }else{
-                console.log("no")
+                // console.log("no")
                 const pullingfrineds = await friendsrequestdb.updateOne({userid:req.params.sentto},
                     {$pull:{
                         Friend:{friendsUniqueId:req.session.user}
@@ -333,34 +333,34 @@ module.exports.FriendsaddOrUpdate =async (req,res)=>{
         }   
 
         const sent = await FriendRequestSentDb.find({userId:req.session.user._id})
-        console.log(sent,"this is the sent")
+        // console.log(sent,"this is the sent")
         if(!sent[0]){
             const SentFR = await FriendRequestSentDb.create({userId:req.session.user._id})
-            console.log(SentFR,"this is the sentDRF")
-            console.log(SentFR.id)
+            // console.log(SentFR,"this is the sentDRF")
+            // console.log(SentFR.id)
             // const updatingone = await 
             const updating = await FriendRequestSentDb.findOneAndUpdate({userId:req.session.user._id},
             {$push:{
                 SentFR:req.params.sentto
             }})
-            console.log(updating,"this is the update ")
+            // console.log(updating,"this is the update ")
         }
         else{
             let flag=0;
-            console.log(sent[0].SentFR.length,"********************")
+            // console.log(sent[0].SentFR.length,"********************")
             sent[0].SentFR
             for (let index = 0; index < sent[0].SentFR.length; index++) {
                 // console.log(sent[0].SentFR[index].toString())
-                console.log(req.session.user._id)
+                // console.log(req.session.user._id)
                 if(sent[0].SentFR[index]==req.params.sentto){
-                    console.log()
+                    // console.log()
                     flag=1
                     break
                 }
             }
             // console.log(flag,"/////////////////////////////////")
             if(flag==0){
-                console.log("not found sent fr id iis :: ",req.session.user._id)
+                // console.log("not found sent fr id iis :: ",req.session.user._id)
                 const updatearray = await FriendRequestSentDb.findOneAndUpdate({userId:req.session.user._id},{$push:{
                     SentFR:req.params.sentto
                 }},{newI:true})
@@ -370,7 +370,7 @@ module.exports.FriendsaddOrUpdate =async (req,res)=>{
                     SentFR:req.params.sentto
                 }},{new:true})
                 
-                console.log(foundanddelete,"found sent fr !!")
+                // console.log(foundanddelete,"found sent fr !!")
             }
 
         }
@@ -444,4 +444,8 @@ module.exports.FriendsRequestPage = async (req,res)=>{
     }
 
     // return res.send()
+}
+module.exports.FreindsRequestnumber = (req,res)=>{
+    console.log("heloow")
+    res.send();
 }

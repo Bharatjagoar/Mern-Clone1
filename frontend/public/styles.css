@@ -67,7 +67,18 @@ body{
 }
 
 /* put it here  */
-
+.passwordinputcontainer{
+    position: relative;
+    width: auto;
+    height: auto;
+    background-color: #1877F2;
+}
+.passwordEye{
+    text-align: center;
+    position: absolute;
+    margin: 0px auto;
+    color: rebeccapurple;
+}
 
 .Login{
     border-radius: 5px;

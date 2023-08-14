@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import platform from "platform"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-solid-svg-icons"
 
 toast.configure();
 function Form() {
@@ -58,7 +60,7 @@ function Form() {
   function passwordlogin(e) {
     setpassword(e.target.value);
   }
-
+  const settype = "text"
   return (
     <form className="Homesignup" action="" method="post">
       <input
@@ -69,12 +71,14 @@ function Form() {
         className="thisinput"
       />
       <input
-        type="password"
+        type={settype}
         placeholder="password"
         onChange={(e) => {
           passwordlogin(e);
-        }}
+        }
+      } 
       />
+      
       <button
         className="Login"
         onClick={(e) => {
