@@ -40,6 +40,11 @@ const {friendRequest} = useSelector(state=>state.custom)
             // const CheckingApi = axios.get("http://localhost:5000/User/CheckingApi")
 
             const FrRooms = await axios.get("http://localhost:5000/User/FriendsRequestCheck")
+            console.log(FrRooms.data.RevievedFriendsRQ.length,"/*/*/*/*/*/*/*/*/*/*/*/")
+            dispatch({
+              type:"numberofreq",
+              payload:FrRooms.data.RevievedFriendsRQ.length
+            })
               if(FrRooms.data.RevievedFriendsRQ){
                 socket.emit("jointheseRevievedFriendsRQ",{array:FrRooms.data.RevievedFriendsRQ,
                   sessionid:SesResponse.data.user._id})

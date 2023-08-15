@@ -445,7 +445,4 @@ module.exports.FriendsRequestPage = async (req,res)=>{
 
     // return res.send()
 }
-module.exports.FreindsRequestnumber = (req,res)=>{
-    console.log("heloow")
-    res.send();
-}
+

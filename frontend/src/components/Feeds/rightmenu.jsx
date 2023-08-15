@@ -3,6 +3,7 @@ import RightsideCSS from "./rightmenu.module.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import DisplayPicture from "./sides/DisplayPicture";
 import {useNavigate} from "react-router-dom"
+import {useSelector} from "react-redux"
 import {
     faFacebookMessenger, faLess
 } from "@fortawesome/free-brands-svg-icons"
@@ -23,6 +24,8 @@ import axios from "axios";
 function RightsideMenu(){
     const [requestnumber,setrequestnumber]=useState()
     const navigate = useNavigate()
+    const [ReqCounts,setReqCounts]=useState()
+    const {NumberOfReq} = useSelector(state=>state.custom)
     const DpRef=useRef(null);
     const btnRef =useRef(null)
     const [style,setStyle]=useState(true)
@@ -45,17 +48,16 @@ function RightsideMenu(){
         })
     }
     useEffect(()=>{
-        // console.log(DpRef.current.className)
-        // console.log(btnRef.current.className)
+        setReqCounts(NumberOfReq)
+
         socket.on("onlineFriends",()=>{
             setrequestnumber(true)
-            console.log(Date.now().toLocaleString())
+            console.log(NumberOfReq,"NumberOfReq")
+            // console.log(Date.now().toLocaleString())
             timeOut()
         })
         document.addEventListener("click",(e)=>{
-            // console.log(DpRef.current.className,"this is ther")
             var windows=e.target.className
-            // console.log(windows,"this is class required")
             if(!(windows==DpRef.current.className || windows==btnRef.current.className)){
                 setStyle(true)
             }
@@ -68,12 +70,6 @@ function RightsideMenu(){
             setrequestnumber(false)
             console.log(Date.now().toLocaleString(),"under time out ")
         }, 5000);
-        try {
-            const FRQnumbers =await axios.get("http://localhost:5000/User/friendsrequestnumber")
-            console.log(FRQnumbers)
-        } catch (error) {
-            
-        }
         
     }
 
@@ -81,7 +77,7 @@ function RightsideMenu(){
         <div className={RightsideCSS.outerside}><FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faAdd} /></div>
         <div className={RightsideCSS.outerside}><FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faFacebookMessenger}/></div>
         <div className={RightsideCSS.outerside}>
-            {requestnumber?<div className={RightsideCSS.totalFriendsRequest}>fdsa</div>:null}
+            {requestnumber?<div className={RightsideCSS.totalFriendsRequest}>{ReqCounts+1}</div>:null}
             <FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faBell}/></div>
         <div className={RightsideCSS.outerside} id="#windows"> <button className={RightsideCSS.ProfileBtn} ref={DpRef}  onClick={()=>{btnpressed()}}><DisplayPicture name={btnRef}/></button>
             <div className={RightsideCSS.ProfileSetting} style={style?{display:"none"}:{display:"block"}}>
@@ -93,6 +89,5 @@ function RightsideMenu(){
         
     </div> 
 }
-{/* <img src="/static/media/BlankImage.2099e5a8dc8f7c3c685f.jpg" class="displayPicture_image__LseWT"> */}
 
 export default RightsideMenu;

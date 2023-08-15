@@ -7,7 +7,8 @@ const initialstate={
     Sess:null,
     Dp:null,
     InputDialougeBox:null,
-    Freinds:null
+    Freinds:null,
+    NumberOfReq:0
 }
 
 export const custom = createReducer(initialstate,{
@@ -34,6 +35,9 @@ export const custom = createReducer(initialstate,{
     },
     friendRequest:(state,action)=>{
         state.Freinds=action.payload
+    },
+    numberofreq:(state,action)=>{
+        state.NumberOfReq=action.payload
     }
     
 })
