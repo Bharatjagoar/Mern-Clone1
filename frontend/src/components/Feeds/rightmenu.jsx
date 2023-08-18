@@ -16,6 +16,7 @@ import {
 import { useState ,useRef} from "react";
 import { useEffect } from "react";
 import socket from "../../socket";
+import { motion } from "framer-motion";
 import axios from "axios";
 
 
@@ -25,7 +26,6 @@ function RightsideMenu(){
     const [requestnumber,setrequestnumber]=useState()
     const navigate = useNavigate()
     const [ReqCounts,setReqCounts]=useState()
-    const {NumberOfReq} = useSelector(state=>state.custom)
     const DpRef=useRef(null);
     const btnRef =useRef(null)
     const [style,setStyle]=useState(true)
@@ -47,12 +47,16 @@ function RightsideMenu(){
             console.log(err)
         })
     }
+    async function numbersetting() {
+            const FrRooms = await axios.get("http://localhost:5000/User/FriendsRequestCheck")
+            // console.log(FrRooms.data.RevievedFriendsRQ.length)
+            setReqCounts(FrRooms.data.RevievedFriendsRQ.length)
+    }
     useEffect(()=>{
-        setReqCounts(NumberOfReq)
 
         socket.on("onlineFriends",()=>{
+            numbersetting()
             setrequestnumber(true)
-            console.log(NumberOfReq,"NumberOfReq")
             // console.log(Date.now().toLocaleString())
             timeOut()
         })
@@ -74,18 +78,20 @@ function RightsideMenu(){
     }
 
     return <div className={RightsideCSS.right}>
-        <div className={RightsideCSS.outerside}><FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faAdd} /></div>
-        <div className={RightsideCSS.outerside}><FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faFacebookMessenger}/></div>
-        <div className={RightsideCSS.outerside}>
-            {requestnumber?<div className={RightsideCSS.totalFriendsRequest}>{ReqCounts+1}</div>:null}
-            <FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faBell}/></div>
-        <div className={RightsideCSS.outerside} id="#windows"> <button className={RightsideCSS.ProfileBtn} ref={DpRef}  onClick={()=>{btnpressed()}}><DisplayPicture name={btnRef}/></button>
+        <motion.div whileTap={{scale:0.8}} className={RightsideCSS.outerside}><FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faAdd} /></motion.div>
+        <motion.div whileTap={{scale:0.8}} className={RightsideCSS.outerside}><FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faFacebookMessenger}/></motion.div>
+        <motion.div whileTap={{scale:0.8}} className={RightsideCSS.outerside}>
+            
+            {requestnumber?<div className={RightsideCSS.totalFriendsRequest}>{ReqCounts}</div>:null}
+            <FontAwesomeIcon className={RightsideCSS.rightFonticons} icon={faBell}/>
+        </motion.div>
+        <motion.div className={RightsideCSS.outerside} id="#windows"><button className={RightsideCSS.ProfileBtn} ref={DpRef}  onClick={()=>{btnpressed()}}><DisplayPicture name={btnRef}/></button>
             <div className={RightsideCSS.ProfileSetting} style={style?{display:"none"}:{display:"block"}}>
                 <div className={RightsideCSS.ProfileMenu}><button onClick={()=>{destroy()}}><FontAwesomeIcon icon={faRightFromBracket} /> logout</button></div>
                 <hr/>
             <div className={RightsideCSS.ProfileMenu}><button onClick={()=>{updateProfile()}}> <FontAwesomeIcon icon={ faGear}/> Settings </button></div>
             </div>
-        </div>
+        </motion.div>
         
     </div> 
 }

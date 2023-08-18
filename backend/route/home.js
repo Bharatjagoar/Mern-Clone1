@@ -93,6 +93,52 @@ function socketRoutes(io){
                 
             }
         })
+
+
+
+
+
+
+
+
+
+        socket.on("addFriends",async (data)=>{
+            console.log(data,"!!!!!!!!!!!!")
+            
+            console.log("hell world ")
+            const socketids = await io.fetchSockets()
+            
+            console.log(socketids[0].id,"fdfdsafdsafdsafd=============================  f")
+            for (let index = 0; index < socketids.length; index++) {
+                console.log(" online for ou")
+                console.log(45,"this is socketids[index]",socketids[index].userId)
+                console.log(data.check,"!!!!! 45")
+            
+                if(data.check._id==socketids[index].userId){
+                    console.log("yes found")
+                    console.log(index)
+                    io.to(socketids[index].id).emit("onlineFriends")
+                    break;
+                }
+                
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     })
     
 

@@ -1,0 +1,25 @@
+{
+  "name": "mern-clone1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend":"cd frontend && npm start",
+    "backend":"cd backend && npm start",
+    "start": "concurrently \"npm run frontend\" \"npm run backend\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bharatjagoar/Mern-Clone1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bharatjagoar/Mern-Clone1/issues"
+  },
+  "homepage": "https://github.com/bharatjagoar/Mern-Clone1#readme",
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

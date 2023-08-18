@@ -15,11 +15,15 @@
     right: 0;   
     width: 15%; 
 }
-.IconAddfriend{
-    color:green;
-    font-size: 1.8rem;
+
+.iconcontainer{
+    /* background-color: aqua; */
     position: absolute;
     right: 0;
+    font-size: 1.5rem;
+}
+.headericon{    
+    margin: 5px;
 }
 .CrudPost{
     height: 40px;

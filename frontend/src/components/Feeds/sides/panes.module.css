@@ -3,3 +3,14 @@
     width: 100%;
     height: auto;
 }
+.mainConatiner{
+    position: relative;
+    background-color: rebeccapurple;
+}
+.ChattinWindow{
+    background-color: lightgreen;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

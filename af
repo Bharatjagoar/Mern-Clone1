@@ -1,0 +1,199 @@
+[33mcommit 29366c31b2a6d9018ced2eff0494ff24771ae86a[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: bharat jagoar <bharatjagoar15@gmail.com>
+Date:   Tue Aug 15 07:59:50 2023 +0530
+
+    commiting !
+
+[33mcommit da503b9a57bb67db6ba737bd41a97c44b80cbafc[m
+Author: bharat jagoar <bharatjagoar15@gmail.com>
+Date:   Mon Aug 14 11:32:34 2023 +0530
+
+    rightmenu rerendering problem fixed !
+
+[33mcommit ade555242b70a2c19e748c63a9c1116ded41d1af[m
+Author: bharat jagoar <bharatjagoar15@gmail.com>
+Date:   Sun Aug 13 22:36:30 2023 +0530
+
+    socket notification timming set
+
+[33mcommit 53e2054c5791ff28383978d2bf2f2911f2305d10[m
+Author: bharat jagoar <bharatjagoar15@gmail.com>
+Date:   Sat Mar 25 10:48:36 2023 +0530
+
+    socket io corrected
+
+[33mcommit 20c1e22f525021c8b2f9f3b7a85220c6efec7246[m
+Author: bharat jagoar <bharatjagoar15@gmail.com>
+Date:   Wed Mar 22 11:12:15 2023 +0530
+
+    sent FR problem solved
+
+[33mcommit 4db8419fc2e8a871495346cc121b0b6baaf4568a[m
+Author: Bhrat Kumar Jagoar <bharatjagoar15@gmail.com>
+Date:   Fri Jan 20 06:09:46 2023 +0530
+
+    reset
+
+[33mcommit 4a26bbe62d0afc715877a52a6a9f5a372ee8e2b8[m
+Author: Bhrat Kumar Jagoar <bharatjagoar15@gmail.com>
+Date:   Thu Jan 19 06:53:02 2023 +0530
+
+    now able to create rooms for sent and recieved FRs
+
+[33mcommit ccdb362a58a33b0aa8b166b4c03b412e3bf74106[m
+Author: Bhrat Kumar Jagoar <bharatjagoar15@gmail.com>
+Date:   Wed Jan 18 06:02:56 2023 +0530
+
+    SentFR minor mistakes corrected
+
+[33mcommit ddc4a404700a4fa61a46810d5658821f5f5d36d8[m
+Author: Bhrat Kumar Jagoar <bharatjagoar15@gmail.com>
+Date:   Tue Jan 17 08:23:37 2023 +0530
+
+    friends and sentFR done , going towords socket connection now
+
+[33mcommit 2b29533024106b582d674a4356b211c81e99295f[m
+Author: unknown <bharatjagoar15@gmail.com>
+Date:   Sat Jan 14 07:45:41 2023 +0530
+
+    changes
+
+[33mcommit 32d12d8279445196c93f77665da606e8255cdcbc[m
+Merge: 9fd1f04 850752c
+Author: unknown <bharatjagoar15@gmail.com>
+Date:   Sat Jan 14 07:43:18 2023 +0530
+
+    pulling the changes
+
+[33mcommit 9fd1f04411b78a1bab13eaddc333d4ad675a8a7e[m
+Author: unknown <bharatjagoar15@gmail.com>
+Date:   Sat Jan 14 07:15:05 2023 +0530
+
+    removing and creating friends feature from scratch
+
+[33mcommit 850752c5edf89349fc2149725537cde6bc388d24[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Tue Jan 10 07:03:28 2023 +0530
+
+    commit for windows reinstallation
+
+[33mcommit 4fadd191939a74cf4c928c78920698d370e482dd[m
+Author: unknown <bharatjagoar15@gmail.com>
+Date:   Wed Jan 4 19:26:51 2023 +0530
+
+    adding the rooms to frschemas and starting the sentfrschemasDB setup
+
+[33mcommit 5a22a8b60b1d3abd4b1873a565f0ec33e827631f[m
+Author: unknown <bharatjagoar15@gmail.com>
+Date:   Thu Dec 22 11:50:56 2022 +0530
+
+    debugging display picture error (commit)
+
+[33mcommit 6671f25fa140a1138124cb131655d318098659a4[m
+Author: unknown <bharatjagoar15@gmail.com>
+Date:   Sun Dec 18 12:06:42 2022 +0530
+
+    just like that changes in package.js
+
+[33mcommit 77d5bacd4018e5a6839658a3209de0568fb835be[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Fri Sep 30 17:58:30 2022 +0530
+
+    socket add on frontend and backend but FR getting notified to everyone
+
+[33mcommit 6a75afd19fd8d7652d5888982533e2c452d68238[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Thu Sep 29 06:01:01 2022 +0530
+
+    privacy continuedd and api creation
+
+[33mcommit 2a76e5c76332c2b4ec94045383fc740266547ae1[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Tue Sep 27 21:52:32 2022 +0530
+
+    continued ......
+
+[33mcommit 3a374961352a94a608f9d043b634a19869c787e0[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Tue Sep 27 09:25:36 2022 +0530
+
+    starting to add privacy UI and backend changes
+
+[33mcommit 1af132052adf54dbbd47326bc47a6324898bdcf2[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Sat Sep 24 19:32:16 2022 +0530
+
+    this is the Password updation major change
+
+[33mcommit e6f78a3fafd223dedfd24809ddc57ae45974a583[m
+Merge: 13cc7f1 bc578c2
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Fri Sep 23 22:11:12 2022 +0530
+
+    Merge branch 'master' of https://github.com/bharatjagoar/Mern-Clone1
+
+[33mcommit 13cc7f1cc94ac9bbe9469688f853afe6ef89297f[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Fri Sep 23 22:07:38 2022 +0530
+
+    Password update and Backend Api creation
+
+[33mcommit 688b9c7965af3930af172b1a54079b660dfeb03c[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Fri Sep 23 22:06:45 2022 +0530
+
+    Password update and Backend Apicreation
+
+[33mcommit bc578c2eeef815713456c3bbe931738211ba3a0e[m
+Author: unknown <bharatjagoar15@gmail.com>
+Date:   Tue Sep 20 05:52:11 2022 +0530
+
+    react package updation (material UI)
+
+[33mcommit 2b13a1734f90175e89c8aab0310d60de01e352bf[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Mon Sep 19 22:08:31 2022 +0530
+
+    this is password form updation in change password component !!
+
+[33mcommit d47d317db148a8a9a86834943b21f14321063f6a[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Sun Sep 18 21:24:44 2022 +0530
+
+    password bigning ����
+
+[33mcommit 11941e1d6c36ede3b36f0ab92e7b685901017cc8[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Sun Sep 18 17:12:22 2022 +0530
+
+    profile pic on login/logout
+
+[33mcommit e58a35c441eb1d0f6ec09902d7011bfb5d2904c9[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Sun Sep 18 09:51:34 2022 +0530
+
+    checking the force results
+
+[33mcommit aa0f870ef5297ab3269883cb61bd314596e2cfa6[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Sun Sep 18 09:46:03 2022 +0530
+
+    Dp major problem solved !
+
+[33mcommit 92f08ceb13a4e10f53ed97bc0d80a6c036a37600[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Sat Sep 17 22:32:27 2022 +0530
+
+    sttus
+
+[33mcommit 9ab1e4ff3e49ba701d5ce13fbaad7e1f32f19acb[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Fri Sep 16 22:27:42 2022 +0530
+
+    ReactEasyCropProblem
+
+[33mcommit c57be157cfa0374529f31e628ce8dfe5bc0c0f85[m
+Author: Bharat Jagoar <bharatjagoar15@gmail.com>
+Date:   Fri Sep 16 09:51:21 2022 +0530
+
+    first commit

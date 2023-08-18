@@ -69,7 +69,10 @@
     background-color: red;
     color: white;
     position: absolute;
+    height: auto;
+    width: auto;
+    font-weight: 600;
     right: 0;
-    height: 50%;
-    width: 50%;
+    font-size: 11px;
+    padding: 3px 3px;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import DisplayPictureCSS from "./displayPicture.module.css"
 import {useSelector} from "react-redux"
+import {motion} from "framer-motion"
 
 function DisplayPicture({name,pic}){
     const {Sess} = useSelector(state=>state.custom)
@@ -16,9 +17,11 @@ function DisplayPicture({name,pic}){
 
 
     // 
-    return <div className={DisplayPictureCSS.containerDIV}>
+    return <motion.div className={DisplayPictureCSS.containerDIV}
+            whileTap={{scale:0.8}}
+    >
         <img src={srces} ref={name} className={DisplayPictureCSS.image}/>
-    </div>
+    </motion.div>
 }
 
 export default DisplayPicture;

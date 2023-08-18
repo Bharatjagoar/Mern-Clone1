@@ -35,7 +35,7 @@ function Posts({socket})  {
     // console.log(newList,"///*/*/*/*/*/*/*")
     setarr(newList)
   }
-  console.log("arr/////////////////",arr)
+  
 
   return (
     <div className={PostCSS.outerMostDiv}>

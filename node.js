@@ -1,7 +1,6 @@
-console.log("hello world ")
-const ages = [5,2,4,8,2,10,5]
-const newarr = ages.filter((x)=>{
-    return x<6
+
+
+let icon=document.getElementById("jef")
+icon.addEventListener("click",()=>{
+    console.log("helloworld")
 })
-console.log(newarr)
-console.log(ages)
