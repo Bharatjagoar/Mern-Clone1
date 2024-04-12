@@ -5,6 +5,7 @@ const friendsrequestdb = require("../schema/friendRequest")
 const FriendRequestSentDb =require("../schema/FreindRequestSent")
 module.exports.createuser=async (req,res)=>{
     try{
+        console.log(req.body.username,"this is it !")
         const Userfound=await UserDB.findOne({UserName:req.body.username})
         console.log(Userfound,"found")
         if(!Userfound){

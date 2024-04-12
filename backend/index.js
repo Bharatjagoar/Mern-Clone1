@@ -48,7 +48,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxage:1000*60*60},
     store:mongoStore.create({
-        mongoUrl:"mongodb://localhost:27017/databasedb",
+        mongoUrl:"mongodb://0.0.0.0:27017/databasedb",
         autoRemove:"disabled"
     },(err)=>{
         Console.log(err || "error from mongo store !! ")

@@ -67,7 +67,8 @@ function PostHeader({name,created,Post,media,user,deleted,display}){
         console.log(Sess._id)
         console.log(user)
         if(friends.data.mes){
-            socket.emit("addFriends",{check:user})
+            console.log("hello world");
+            socket.emit("addFriends",{check:user});
         }
     }
 

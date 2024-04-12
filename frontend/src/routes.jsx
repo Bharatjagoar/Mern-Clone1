@@ -39,7 +39,10 @@ function Routing() {
             // const CheckingApi = axios.get("http://localhost:5000/User/CheckingApi")
 
             const FrRooms = await axios.get("http://localhost:5000/User/FriendsRequestCheck")
-            console.log(FrRooms.data.RevievedFriendsRQ.length)
+            console.log("fr ",FrRooms.data.RevievedFriendsRQ);
+            if(FrRooms.data.RevievedFriendsRQ){
+              
+              console.log(FrRooms.data.RevievedFriendsRQ.length)
 
               if(FrRooms.data.RevievedFriendsRQ){
                 socket.emit("jointheseRevievedFriendsRQ",{array:FrRooms.data.RevievedFriendsRQ,
@@ -73,6 +76,8 @@ function Routing() {
             // })
               // console.log(SesResponse.data.user._id)
 
+            }
+            
             
         } catch (error) {
           console.log(error,"fdsafdsa")

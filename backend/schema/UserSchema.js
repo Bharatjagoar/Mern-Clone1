@@ -9,7 +9,7 @@ const userschema=Mongoose.Schema({
     lname:{
         type:"String",
     },
-    i:{
+    UserName:{
         type:"String"
     },
     password:{

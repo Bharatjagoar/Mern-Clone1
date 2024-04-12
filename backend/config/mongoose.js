@@ -1,5 +1,9 @@
 const mongo = require("mongoose");
-mongo.connect('mongodb://127.0.0.1:27017/databasedb');
+mongo.connect('mongodb://0.0.0.0:27017/databasedb' ,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+  
 const connect = mongo.connection
 connect.on("error",function(err){console.log("error connecting to database !!",err)})
 connect.once("open",function(){
@@ -9,3 +13,15 @@ connect.once("open",function(){
 
 
 module.exports=mongo
+
+
+// const mongoose = require("mongoose")
+// mongoose.connect("mongodb://localhost:27017/databasedb")
+// .then(()=>{
+//     console.log("database connected successfully")
+// })
+// .catch((err)=>{
+//     console.log("error connecting data base!")
+//     console.log(err)
+// })
+// module.exports = mongoose
