@@ -401,7 +401,7 @@ module.exports.FriendRequestEnquery = async(req,res)=>{
             
             // console.log(FrSchcemas,"////")
             if(FrSchcemas){
-                console.log("this is the result :: ", FrSchcemas.Friend)
+                // console.log("this is the result :: ", FrSchcemas.Friend)
                 recievedFRs = FrSchcemas.Friend
             }
 

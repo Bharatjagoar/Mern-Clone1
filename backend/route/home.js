@@ -56,51 +56,7 @@ function socketRoutes(io){
             // console.log(123,data.id)
             socket.join(data.id)
         })
-        socket.on("addFriends",async (data)=>{
-            console.log(data,"!!!!!!!!!!!!")
-            // console.log(0,"\t",data.check)
-            // try {
-            //     let roomsockets = await io.in(data.check).fetchSockets()
-            //     console.log(roomsockets.length )
-            //     if(roomsockets[0]){
-            //         console.log(roomsockets[roomsockets.length-1].id)
-            //         io.to(roomsockets[roomsockets.length-1].id).emit("online")
-            //     }
-            // } catch (error) {
-            //     console.log(error)
-            // }
-            console.log("hell world ")
-            const socketids = await io.fetchSockets()
-            // console.log(socketids[0],"---------------------->")
-
-            // socketids.forEach(element => {
-            //     console.log(element.userId,"----------------------------------")
-            // });
-            console.log(socketids[0].id,"fdfdsafdsafdsafd=============================  f")
-            for (let index = 0; index < socketids.length; index++) {
-                console.log(" online for ou")
-                // console.log("data :: ",data.check)
-                // console.log("hello wrold ", socketids[index].id)
-                console.log(45,"this is socketids[index]",socketids[index].userId)
-                console.log(data.check,"!!!!! 45")
-                // socketids[index].userId
-                if(data.check._id==socketids[index].userId){
-                    console.log("yes found")
-                    console.log(index)
-                    io.to(socketids[index].id).emit("onlineFriends")
-                    break;
-                }
-                
-            }
-        })
-
-
-
-
-
-
-
-
+        
 
         socket.on("addFriends",async (data)=>{
             console.log(data,"!!!!!!!!!!!!")

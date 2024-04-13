@@ -55,6 +55,7 @@ function RightsideMenu(){
     useEffect(()=>{
 
         socket.on("onlineFriends",()=>{
+            alert("hello world !!")
             numbersetting()
             setrequestnumber(true)
             // console.log(Date.now().toLocaleString())
@@ -73,7 +74,7 @@ function RightsideMenu(){
         setTimeout(() => {
             setrequestnumber(false)
             console.log(Date.now().toLocaleString(),"under time out ")
-        }, 5000);
+        }, 2000);
         
     }
 
