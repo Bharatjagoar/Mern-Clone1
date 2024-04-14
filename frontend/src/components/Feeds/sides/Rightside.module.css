@@ -1,7 +1,26 @@
-.right{
-    color: yellow;
+.outermost{
+    /* color: yellow; */
     background-color: blanchedalmond;
-    width: 5%;
-    
+    width: 30%;
     /* display: inline-block; */
+}
+.chatboxcontainer{
+    background-color: yellow;
+    display: flex;
+    justify-content: right;
+    height: 100vh;
+    overflow: hidden;
+}
+.chatbox{
+    height: 100%;
+    display: block;
+    background-color: red;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.header{
+    display: block;
 }

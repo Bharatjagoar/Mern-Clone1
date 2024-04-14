@@ -58,7 +58,7 @@ function Leftside({object}){
                 <div className={leftsideCSS.MediaAndFeelings} onClick={openmaininput}><FontAwesomeIcon icon={faFaceSmile} color="yellow"  className={leftsideCSS.MediaIcon}/> <span className={leftsideCSS.spantage}>feelings</span></div>
             </div>
         </div>
-        <Post socket={object}/>
+        <Post/>
     </div>
 }
 
