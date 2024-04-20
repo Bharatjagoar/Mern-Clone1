@@ -19,10 +19,11 @@ import axios from "axios";
 function PostHeader({name,created,Post,media,user,deleted,display}){
     const[changeIcon,setchangeIcon]=useState(false)
     const {Sess}= useSelector(state=>state.custom)
+    var {ChatUserDetails}=useSelector(state=>state.custom)
     const dispatch=useDispatch()
     useEffect(()=>{
         let icon = document.getElementById("headericon")
-        console.log(icon)
+        // console.log(icon)
         // icon.addEventListener("click",()=>{
         //     console.log("helloworld")
         // })
@@ -65,7 +66,7 @@ function PostHeader({name,created,Post,media,user,deleted,display}){
         // console.log(friends.data)
         setchangeIcon(changeIcon?false:true)
         console.log(Sess._id)
-        console.log(user)
+        console.log(user,"this is user id !!!!!!",user)
         if(friends.data.mes){
             console.log("hello world");
             socket.emit("addFriends",{check:user});
@@ -73,10 +74,10 @@ function PostHeader({name,created,Post,media,user,deleted,display}){
     }
 
     function Chatting(){
-        console.log("hello world !! ")
+        // console.log("chatting ....",user)
         dispatch({
-            type:"chatting",
-            payload : true
+            type:"userChatboxDetailsupdate",
+            payload:user
         })
     }
 

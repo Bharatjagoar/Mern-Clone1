@@ -1,0 +1,21 @@
+.mainDiv{
+    /* z-index: 5; */
+    background-color: rgb(13, 179, 35);
+    height: 33vh;
+    width: 20vw;
+    min-height: 340px;
+    max-width: 300px;
+    min-width: 280px;
+    /* position: fixed ; */
+    /* bottom: 0; */
+    /* right: 10px; */
+    padding: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.mainContainer{
+    background-color: red;
+    display: flex;
+}
+
+

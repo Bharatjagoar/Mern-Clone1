@@ -10,7 +10,7 @@ import { useDispatch, useSelector} from "react-redux"
 import { useEffect } from "react";
 
 
-function Leftside({object}){
+function Leftside(){
     const {Sess}= useSelector(state=>state.custom)
     const [state,setstate]=useState(false)
     const dispatch = useDispatch()

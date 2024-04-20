@@ -8,11 +8,9 @@ function socketRoutes(io){
     io.on("connection",async (socket)=>{
         // console.log(socket.id,"socket id")
         // console.log(socket.handshake.auth,"")
-        socket.on("connectionpossible",(data)=>{  
-              
-            console.log("from useEffect",data)
-        })
+        
         socket.on("loggedinUser",data=>{
+            console.log(data,"from the data user ")
         })
         socket.on("JoinTheseFriendRequestroom",data=>{
             // console.log("rom list data",data.myid)
@@ -79,7 +77,6 @@ function socketRoutes(io){
                 
             }
         })
-
 
 
 

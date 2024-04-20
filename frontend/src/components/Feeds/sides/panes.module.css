@@ -8,10 +8,19 @@
     position: relative;
     background-color: rebeccapurple;
 }
+
+.allcontainer{
+    position: relative;
+    
+}
+
 .ChattinWindow{
     background-color: lightgreen;
     display: inline-block;
     position: absolute;
     bottom: 0;
     right: 0;
+}
+.mappeddata{
+    background-color: yellow;
 }

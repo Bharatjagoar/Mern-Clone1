@@ -1,0 +1,24 @@
+.mainContainer{
+    /* background-color: red; */
+    display: flex;
+    position: relative;
+}
+
+.dpcontainer{
+    display: inline-block;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+}
+.chatusername{
+    /* background-color: yellow; */
+    color: yellow;
+    margin-left: 10px;
+}
+.closebtn{
+    color: blueviolet;
+    float: right;
+    position: absolute;
+    right:0;
+}
+
