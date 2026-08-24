@@ -1,0 +1,196 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrgRole {
+  org_admin
+  member
+}
+
+enum TaskStatus {
+  todo
+  in_progress
+  review
+  done
+}
+
+enum TaskPriority {
+  low
+  medium
+  high
+  urgent
+}
+
+enum JobStatus {
+  pending
+  active
+  completed
+  failed
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  orgMemberships  OrgMember[]
+  refreshTokens   RefreshToken[]
+  taskAssignments TaskAssignment[]
+  comments        Comment[]
+
+  @@map("users")
+}
+
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  members  OrgMember[]
+  projects Project[]
+
+  @@map("organizations")
+}
+
+// Membership row is meaningless once either side is gone, so both FKs cascade.
+model OrgMember {
+  id        String   @id @default(uuid())
+  orgId     String   @map("org_id")
+  userId    String   @map("user_id")
+  role      OrgRole  @default(member)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([orgId, userId])
+  @@index([userId])
+  @@map("org_members")
+}
+
+// Organization -> Project is RESTRICT: org deletion is not a supported flow;
+// this prevents a mistaken org delete from silently wiping every project.
+model Project {
+  id          String    @id @default(uuid())
+  orgId       String    @map("org_id")
+  name        String
+  description String?
+  deletedAt   DateTime? @map("deleted_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Restrict)
+  tasks        Task[]
+
+  @@index([orgId]) // every project list/lookup is scoped by org_id
+  @@map("projects")
+}
+
+// Project -> Task cascades: soft delete (deleted_at) is the normal delete
+// path, so this only fires on an actual hard delete, at which point a
+// project's tasks have no independent lifecycle to preserve.
+model Task {
+  id          String       @id @default(uuid())
+  projectId   String       @map("project_id")
+  title       String
+  description String?
+  status      TaskStatus   @default(todo)
+  priority    TaskPriority @default(medium)
+  dueDate     DateTime?    @map("due_date")
+  deletedAt   DateTime?    @map("deleted_at")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  project     Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assignments TaskAssignment[]
+  comments    Comment[]
+
+  // Indexes: projectId (every task query is scoped to a project), status and
+  // priority (task list filters), dueDate (due-date range filter), and a
+  // composite (projectId, status) for the common "tasks in project X with
+  // status Y" query used by the dashboard/list endpoints. A generated
+  // tsvector column + GIN index for full-text search is added in the
+  // migration SQL (Prisma has no native tsvector type).
+  @@index([projectId])
+  @@index([status])
+  @@index([priority])
+  @@index([dueDate])
+  @@index([projectId, status])
+  @@map("tasks")
+}
+
+// Task -> cascade (assignment is meaningless once the task is gone).
+// User -> restrict: no user-delete feature is in scope, and this keeps the
+// assignment audit trail intact rather than silently disappearing.
+model TaskAssignment {
+  id         String   @id @default(uuid())
+  taskId     String   @map("task_id")
+  userId     String   @map("user_id")
+  assignedAt DateTime @default(now()) @map("assigned_at")
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@unique([taskId, userId]) // also serves as the "who is assigned" lookup index
+  @@index([userId])
+  @@map("task_assignments")
+}
+
+// Same reasoning as TaskAssignment: cascade on task, restrict on author.
+model Comment {
+  id        String   @id @default(uuid())
+  taskId    String   @map("task_id")
+  userId    String   @map("user_id")
+  body      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([taskId]) // comments are always listed per-task
+  @@map("comments")
+}
+
+model RefreshToken {
+  id                String    @id @default(uuid())
+  userId            String    @map("user_id")
+  tokenHash         String    @unique @map("token_hash")
+  revokedAt         DateTime? @map("revoked_at")
+  replacedByTokenId String?   @map("replaced_by_token_id")
+  expiresAt         DateTime  @map("expires_at")
+  createdAt         DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+// Durable record of each email-notification job so GET /jobs/:id has a
+// stable source of truth independent of BullMQ/Redis job retention.
+model NotificationJob {
+  id         String    @id @default(uuid())
+  queueJobId String?   @map("queue_job_id")
+  type       String    @default("task_assignment_email")
+  status     JobStatus @default(pending)
+  taskId     String?   @map("task_id")
+  assigneeId String?   @map("assignee_id")
+  attempts   Int       @default(0)
+  lastError  String?   @map("last_error")
+  metadata   Json?
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([queueJobId])
+  @@map("notification_jobs")
+}
